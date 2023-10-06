@@ -1,0 +1,32 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Aluno {
+  cpf         String  @id @unique
+  rg          String  @unique
+  nome        String
+  email       String
+  endereco    String
+  nomeUsuario String  @unique
+  usuario     Usuario @relation(fields: [nomeUsuario], references: [nomeUsuario])
+}
+
+model Empresa {
+  cnpj         String  @id @unique
+  nomeFantasia String
+  nomeUsuario  String  @unique
+  usuario      Usuario @relation(fields: [nomeUsuario], references: [nomeUsuario])
+}
+
+model Usuario {
+  nomeUsuario String   @id @unique
+  senha       String
+  Aluno       Aluno?
+  Empresa     Empresa?
+}
