@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Login from "./components/login"
+import CadastroEmpresa from "./components/cadastro"
 
 const App = () => {
 
@@ -7,6 +8,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
       </Routes>
     </BrowserRouter>
   )

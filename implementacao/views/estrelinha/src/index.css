@@ -77,3 +77,14 @@ button:focus-visible {
   background-repeat: no-repeat;
   border-radius: 0px 10px 10px 0px;
 }
+
+.imagem-cadastro{
+  background-image: url(./assets/cadastro.png);
+  width: 500px;
+  height: 500px;
+  margin: 60px 5px;
+  margin-left: -50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0px 10px 10px 0px;
+}
