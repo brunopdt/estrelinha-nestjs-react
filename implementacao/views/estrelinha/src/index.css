@@ -67,3 +67,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.imagem-login{
+  background-image: url(./assets/login.png);
+  width: 555px;
+  height: 600px;
+  margin-left: -50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0px 10px 10px 0px;
+}
