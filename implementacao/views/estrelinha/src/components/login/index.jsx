@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    login: "",
+    nomeUsuario: "",
     senha: "",
   });
 
@@ -31,10 +31,11 @@ const Login = () => {
     async (e) => {
       e.preventDefault();
       try {
-        const resposta = await useApi.post("/usuarios/login", formData);
+        console.log(formData)
+        const resposta = await useApi.post("login", formData);
         console.log(resposta);
         localStorage.setItem("usuario", JSON.stringify(resposta));
-        navigate("/listaPedidos");
+        navigate("/");
       } catch (error) {
         console.error("Erro:", error);
         Swal.fire({
@@ -72,8 +73,8 @@ const Login = () => {
               required
               fullWidth
               label="Nome de Usuário"
-              name="login"
-              value={formData.login}
+              name="nomeUsuario"
+              value={formData.nomeUsuario}
               autoFocus
               onChange={handleChange}
             />
