@@ -4,5 +4,5 @@ const header = { Pragma: 'no-cache' };
 
 export const useApi = axios.create({
     headers: header,
-    baseURL: "http://localhost:8080/"
+    baseURL: "http://localhost:3000/"
 })
