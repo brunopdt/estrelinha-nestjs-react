@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const CadastroEmpresa = () => {
   const [formData, setFormData] = useState({
-    login: "",
+    nomeUsuario: "",
     senha: "",
     cnpj: "",
     nomeFantasia: ""
@@ -34,10 +34,10 @@ const CadastroEmpresa = () => {
       e.preventDefault();
       try {
         console.log(formData)
-        const resposta = await useApi.post("/usuarios/login", formData);
+        const resposta = await useApi.post("/empresa", formData);
         console.log(resposta);
         localStorage.setItem("usuario", JSON.stringify(resposta));
-        navigate("/listaPedidos");
+        navigate("/login");
       } catch (error) {
         console.error("Erro:", error);
         Swal.fire({

@@ -39,7 +39,7 @@ const CadastroAluno = () => {
           const resposta = await useApi.post("/aluno", formData);
           console.log(resposta);
           localStorage.setItem("usuario", JSON.stringify(resposta));
-          navigate("/listaPedidos");
+          navigate("/login");
         } catch (error) {
           console.error("Erro:", error);
           Swal.fire({
