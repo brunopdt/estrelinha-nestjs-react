@@ -26,11 +26,7 @@ export class EmpresaService {
     return this.empresasRepository.find();
   }
 
-  /*async findOne(id: number): Promise<Empresa> {
-    return this.empresasRepository.findOne(id);
-  }*/
-
-  remove(id: number) {
-    return `This action removes a #${id} empresa`;
+  async findOne(cnpj: string): Promise<Empresa> {
+    return this.empresasRepository.findOne(cnpj);
   }
 }
