@@ -25,10 +25,10 @@ export class EmpresaRepository {
     return this.prisma.empresa.findMany();
   }
 
-  /*async findOne(id: number): Promise<Empresa> {
+  async findOne(cnpj: string): Promise<Empresa> {
     return this.prisma.empresa.findUnique({
-      where: { id },
+      where: { cnpj },
     });
-  }*/
+  }
 
 }
