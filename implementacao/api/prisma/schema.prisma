@@ -8,25 +8,92 @@ generator client {
 }
 
 model Aluno {
-  cpf         String  @id @unique
-  rg          String  @unique
-  nome        String
-  email       String
-  endereco    String
-  nomeUsuario String  @unique
-  usuario     Usuario @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  cpf           String      @id @unique
+  rg            String      @unique
+  nome          String
+  email         String
+  endereco      String
+  nomeUsuario   String      @unique
+  contaId       Int?        @unique
+  instituicaoId Int
+  cursoId       Int
+  usuario       Usuario     @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  conta         Conta?      @relation(fields: [contaId], references: [id])
+  Transacao     Transacao[]
+  Instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+  Curso         Curso       @relation(fields: [cursoId], references: [id])
 }
 
 model Empresa {
-  cnpj         String  @id @unique
+  cnpj         String     @id @unique
   nomeFantasia String
-  nomeUsuario  String  @unique
-  usuario      Usuario @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  nomeUsuario  String     @unique
+  usuario      Usuario    @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  Vantagem     Vantagem[]
 }
 
 model Usuario {
-  nomeUsuario String   @id @unique
+  nomeUsuario String     @id @unique
   senha       String
   Aluno       Aluno?
   Empresa     Empresa?
+  Professor   Professor?
+}
+
+model Professor {
+  nome          String
+  cpf           String      @id @unique
+  departamento  String
+  endereco      String
+  nomeUsuario   String      @unique
+  instituicaoId Int
+  contaId       Int?        @unique
+  usuario       Usuario     @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  Instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+  conta         Conta?      @relation(fields: [contaId], references: [id])
+}
+
+model Instituicao {
+  id          Int         @id @default(autoincrement())
+  professores Professor[]
+  cursos      Curso[]
+  Aluno       Aluno[]
+}
+
+model Curso {
+  id            Int         @id @default(autoincrement())
+  nome          String
+  instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+  instituicaoId Int
+  Aluno         Aluno[]
+}
+
+model Vantagem {
+  id          Int         @id @default(autoincrement())
+  nome        String
+  valor       Int
+  fotoKey     String
+  empresa     Empresa     @relation(fields: [empresaCnpj], references: [cnpj])
+  empresaCnpj String
+  Transacao   Transacao[]
+}
+
+model Transacao {
+  id         Int      @id @default(autoincrement())
+  alunoCpf   String
+  valor      Int
+  data       DateTime @default(now())
+  vantagemId Int
+  aluno      Aluno    @relation(fields: [alunoCpf], references: [cpf])
+  vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
+  Conta      Conta?   @relation(fields: [contaId], references: [id])
+  contaId    Int?
+}
+
+model Conta {
+  id         Int         @id @default(autoincrement())
+  saldo      Int         @default(0)
+  transacoes Transacao[]
+  Professor  Professor?
+  Aluno      Aluno?
 }
