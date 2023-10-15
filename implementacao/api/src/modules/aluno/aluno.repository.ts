@@ -6,19 +6,31 @@ import { Aluno, Usuario } from '@prisma/client'
 export class AlunoRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async cadastrarAluno(aluno: Aluno, usuario: Usuario): Promise<Usuario> {
-    return await this.prisma.usuario.create({
-      data: {
-        ...usuario,
-        Aluno: {
-          create: {
-            ...aluno,
-          }
-        }
+  async findAlunoByCpf(cpf: string): Promise<Aluno> {
+    return await this.prisma.aluno.findUnique({
+      where: {
+        cpf,
       },
-      include: {
-        Aluno: true,
-      }
+    });
+  }
+
+  async cadastrarAluno(aluno: Partial<Aluno>, usuario: Usuario, foreignKeys: Partial<Aluno>): Promise<Aluno> {
+    return await this.prisma.aluno.create({
+      data: {
+        ...aluno,
+        instituicao: {
+          connect: { id: foreignKeys.instituicaoId },
+        },
+        curso: {
+          connect: { id: foreignKeys.cursoId },
+        },
+        conta: {create:{}},
+        usuario: {
+          create: {
+            ...usuario
+          }
+        },
+      } as Aluno,
     });
   }
 }

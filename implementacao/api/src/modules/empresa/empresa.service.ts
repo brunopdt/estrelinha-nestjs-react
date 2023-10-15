@@ -1,14 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
 import { EmpresaRepository } from './empresa.repository';
 import { Empresa, Usuario } from '@prisma/client';
-import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 
 @Injectable()
 export class EmpresaService {
   constructor(private readonly empresasRepository: EmpresaRepository) {}
 
   async create(createEmpresaDto: CreateEmpresaDto): Promise<Usuario> {
+    const empresaExistente = await this.findOne(createEmpresaDto.cnpj);
+    if(empresaExistente) throw new ConflictException('Já existe uma empresa cadastrada com esse CNPJ');
+
     const empresa: Empresa = {
       nomeFantasia: createEmpresaDto.nomeFantasia,
       cnpj: createEmpresaDto.cnpj,
@@ -19,6 +21,7 @@ export class EmpresaService {
       nomeUsuario: createEmpresaDto.nomeUsuario,
       senha: createEmpresaDto.senha,
     };
+
     return await this.empresasRepository.cadastraEmpresa(empresa, usuario);
   }
 

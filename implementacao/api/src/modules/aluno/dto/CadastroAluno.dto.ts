@@ -1,4 +1,4 @@
-import { IsString, MaxLength } from "class-validator";
+import { IsInt, IsString, MaxLength } from "class-validator";
 
 export class CadastroAlunoDTO {
   @IsString()
@@ -28,4 +28,10 @@ export class CadastroAlunoDTO {
   @IsString()
   @MaxLength(251)
   senha: string;
+
+  @IsInt()
+  cursoId: number;
+
+  @IsInt()
+  instituicaoId: number;
 }

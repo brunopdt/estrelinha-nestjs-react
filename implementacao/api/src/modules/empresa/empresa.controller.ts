@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { EmpresaService } from './empresa.service';
 import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
+import { Empresa } from '@prisma/client';
 
 @Controller('empresa')
 export class EmpresaController {
