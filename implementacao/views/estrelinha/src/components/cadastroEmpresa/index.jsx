@@ -33,13 +33,10 @@ const CadastroEmpresa = () => {
     async (e) => {
       e.preventDefault();
       try {
-        console.log(formData)
         const resposta = await useApi.post("/empresa", formData);
-        console.log(resposta);
         localStorage.setItem("usuario", JSON.stringify(resposta));
         navigate("/");
       } catch (error) {
-        console.error("Erro:", error);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -67,7 +64,6 @@ const CadastroEmpresa = () => {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
             sx={{ mt: 1 }}
           >
             <TextField
@@ -75,8 +71,8 @@ const CadastroEmpresa = () => {
               required
               fullWidth
               label="Nome de Usuário"
-              name="login"
-              value={formData.login}
+              name="nomeUsuario"
+              value={formData.nomeUsuario}
               autoFocus
               onChange={handleChange}
             />
