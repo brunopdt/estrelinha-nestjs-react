@@ -37,7 +37,7 @@ const CadastroEmpresa = () => {
         const resposta = await useApi.post("/empresa", formData);
         console.log(resposta);
         localStorage.setItem("usuario", JSON.stringify(resposta));
-        navigate("/login");
+        navigate("/");
       } catch (error) {
         console.error("Erro:", error);
         Swal.fire({
@@ -123,6 +123,16 @@ const CadastroEmpresa = () => {
               }}
             >
               CADASTRAR
+            </Button>
+            <Button
+              onClick={() => navigate("/")}
+              fullWidth
+              variant="text"
+              sx={{
+                mb: 3, fontWeight: 800, color: "#7F4AA4"
+              }}
+            >
+              LOGIN
             </Button>
           </Box>
         </Box>

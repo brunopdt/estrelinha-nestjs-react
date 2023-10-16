@@ -31,13 +31,17 @@ const Login = () => {
     async (e) => {
       e.preventDefault();
       try {
-        console.log(formData)
         const resposta = await useApi.post("login", formData);
-        console.log(resposta);
         localStorage.setItem("usuario", JSON.stringify(resposta));
+        Swal.fire({
+          icon: 'success',
+          position: 'top-end',
+          title: 'Sucesso',
+          showConfirmButton: false,
+          timer: 1000
+        })
         navigate("/");
       } catch (error) {
-        console.error("Erro:", error);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -102,40 +106,40 @@ const Login = () => {
               CONECTAR
             </Button>
             <Typography component="h1" variant="h5" sx={{ color: "#7F4AA4", marginTop: 3, fontWeight: 800, fontSize: 18 }}>
-            Não tem uma conta? Cadastre-se
-          </Typography>
-            <Box sx={{display: "flex", gap: 2}}>
-            <Button
-              component={Link}
-              to="/cadastro-aluno"
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 1, mb: 2, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800,
-                ":hover": {
-                  backgroundColor: '#7F4AA4', color: '#FBB80F'
-                }
-              }}
-            >
-              Aluno
-            </Button>
-            
-            <Button
-              component={Link}
-              to="/cadastro-empresa"
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 1, mb: 2, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800,
-                ":hover": {
-                  backgroundColor: '#7F4AA4', color: '#FBB80F'
-                }
-              }}
-            >
-              Empresa
-            </Button>
+              Não tem uma conta? Cadastre-se
+            </Typography>
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <Button
+                component={Link}
+                to="/cadastro-aluno"
+                type="button"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 1, mb: 2, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800,
+                  ":hover": {
+                    backgroundColor: '#7F4AA4', color: '#FBB80F'
+                  }
+                }}
+              >
+                Aluno
+              </Button>
+
+              <Button
+                component={Link}
+                to="/cadastro-empresa"
+                type="button"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 1, mb: 2, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800,
+                  ":hover": {
+                    backgroundColor: '#7F4AA4', color: '#FBB80F'
+                  }
+                }}
+              >
+                Empresa
+              </Button>
             </Box>
           </Box>
         </Box>
