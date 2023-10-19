@@ -1,15 +1,41 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE `Aluno` (
+    `cpf` VARCHAR(191) NOT NULL,
+    `rg` VARCHAR(191) NOT NULL,
+    `nome` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `endereco` VARCHAR(191) NOT NULL,
+    `nomeUsuario` VARCHAR(191) NOT NULL,
+    `contaId` INTEGER NOT NULL,
+    `instituicaoId` INTEGER NOT NULL,
+    `cursoId` INTEGER NOT NULL,
 
-  - A unique constraint covering the columns `[contaId]` on the table `Aluno` will be added. If there are existing duplicate values, this will fail.
-  - Added the required column `cursoId` to the `Aluno` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `instituicaoId` to the `Aluno` table without a default value. This is not possible if the table is not empty.
+    UNIQUE INDEX `Aluno_cpf_key`(`cpf`),
+    UNIQUE INDEX `Aluno_rg_key`(`rg`),
+    UNIQUE INDEX `Aluno_nomeUsuario_key`(`nomeUsuario`),
+    UNIQUE INDEX `Aluno_contaId_key`(`contaId`),
+    PRIMARY KEY (`cpf`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-*/
--- AlterTable
-ALTER TABLE `aluno` ADD COLUMN `contaId` INTEGER NULL,
-    ADD COLUMN `cursoId` INTEGER NOT NULL,
-    ADD COLUMN `instituicaoId` INTEGER NOT NULL;
+-- CreateTable
+CREATE TABLE `Empresa` (
+    `cnpj` VARCHAR(191) NOT NULL,
+    `nomeFantasia` VARCHAR(191) NOT NULL,
+    `nomeUsuario` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `Empresa_cnpj_key`(`cnpj`),
+    UNIQUE INDEX `Empresa_nomeUsuario_key`(`nomeUsuario`),
+    PRIMARY KEY (`cnpj`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Usuario` (
+    `nomeUsuario` VARCHAR(191) NOT NULL,
+    `senha` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `Usuario_nomeUsuario_key`(`nomeUsuario`),
+    PRIMARY KEY (`nomeUsuario`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Professor` (
@@ -19,7 +45,7 @@ CREATE TABLE `Professor` (
     `endereco` VARCHAR(191) NOT NULL,
     `nomeUsuario` VARCHAR(191) NOT NULL,
     `instituicaoId` INTEGER NOT NULL,
-    `contaId` INTEGER NULL,
+    `contaId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Professor_cpf_key`(`cpf`),
     UNIQUE INDEX `Professor_nomeUsuario_key`(`nomeUsuario`),
@@ -74,11 +100,11 @@ CREATE TABLE `Conta` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- CreateIndex
-CREATE UNIQUE INDEX `Aluno_contaId_key` ON `Aluno`(`contaId`);
+-- AddForeignKey
+ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_nomeUsuario_fkey` FOREIGN KEY (`nomeUsuario`) REFERENCES `Usuario`(`nomeUsuario`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_contaId_fkey` FOREIGN KEY (`contaId`) REFERENCES `Conta`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_contaId_fkey` FOREIGN KEY (`contaId`) REFERENCES `Conta`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_instituicaoId_fkey` FOREIGN KEY (`instituicaoId`) REFERENCES `Instituicao`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -87,13 +113,16 @@ ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_instituicaoId_fkey` FOREIGN KEY (`inst
 ALTER TABLE `Aluno` ADD CONSTRAINT `Aluno_cursoId_fkey` FOREIGN KEY (`cursoId`) REFERENCES `Curso`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `Empresa` ADD CONSTRAINT `Empresa_nomeUsuario_fkey` FOREIGN KEY (`nomeUsuario`) REFERENCES `Usuario`(`nomeUsuario`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Professor` ADD CONSTRAINT `Professor_nomeUsuario_fkey` FOREIGN KEY (`nomeUsuario`) REFERENCES `Usuario`(`nomeUsuario`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Professor` ADD CONSTRAINT `Professor_instituicaoId_fkey` FOREIGN KEY (`instituicaoId`) REFERENCES `Instituicao`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Professor` ADD CONSTRAINT `Professor_contaId_fkey` FOREIGN KEY (`contaId`) REFERENCES `Conta`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Professor` ADD CONSTRAINT `Professor_contaId_fkey` FOREIGN KEY (`contaId`) REFERENCES `Conta`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Curso` ADD CONSTRAINT `Curso_instituicaoId_fkey` FOREIGN KEY (`instituicaoId`) REFERENCES `Instituicao`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
