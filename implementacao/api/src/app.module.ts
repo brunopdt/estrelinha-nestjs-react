@@ -8,4 +8,4 @@ import { CursoModule } from './modules/curso/curso.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

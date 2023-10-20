@@ -5,12 +5,12 @@ import { Aluno, Usuario } from '@prisma/client'
 
 @Injectable()
 export class AlunoService {
-  constructor(private readonly alunoRepository: AlunoRepository) {}
+  constructor(private readonly alunoRepository: AlunoRepository) { }
 
   async cadastrarAluno(alunoDTO: CadastroAlunoDTO): Promise<Aluno> {
 
     const alunoExistente = await this.alunoRepository.findAlunoByCpf(alunoDTO.cpf);
-    if(alunoExistente) throw new ConflictException('Já existe um aluno cadastrado com esse CPF');
+    if (alunoExistente) throw new ConflictException('Já existe um aluno cadastrado com esse CPF');
 
     const aluno: Partial<Aluno> = {
       cpf: alunoDTO.cpf,
@@ -31,5 +31,9 @@ export class AlunoService {
     }
 
     return await this.alunoRepository.cadastrarAluno(aluno, usuario, foreignKeys);
+  }
+
+  async getAll() {
+    return await this.alunoRepository.getAll();
   }
 }

@@ -4,7 +4,7 @@ import { Aluno, Usuario } from '@prisma/client'
 
 @Injectable()
 export class AlunoRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async findAlunoByCpf(cpf: string): Promise<Aluno> {
     return await this.prisma.aluno.findUnique({
@@ -24,7 +24,7 @@ export class AlunoRepository {
         curso: {
           connect: { id: foreignKeys.cursoId },
         },
-        conta: {create:{}},
+        conta: { create: {} },
         usuario: {
           create: {
             ...usuario
@@ -32,5 +32,9 @@ export class AlunoRepository {
         },
       } as Aluno,
     });
+  }
+
+  async getAll(): Promise<Aluno[]> {
+    return await this.prisma.aluno.findMany({ orderBy: { conta: { saldo: 'desc' } }, include: { conta: true } })
   }
 }
