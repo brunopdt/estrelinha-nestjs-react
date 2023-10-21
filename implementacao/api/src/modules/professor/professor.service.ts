@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ProfessorRepository } from './professor.repository';
 import { CreatePremiacaoDto } from './dto/CadastroAluno.dto';
-import { Premiacao } from '@prisma/client';
 
 @Injectable()
 export class ProfessorService {
@@ -11,12 +10,13 @@ export class ProfessorService {
     return await this.professorRepository.getTransactions(nomeUsuario);
   }
 
-  async premiar(createPremiacaoDto: CreatePremiacaoDto): Promise<Premiacao> {
-    try {
-      throw Error(`Not implemented - ${createPremiacaoDto.alunoCpf}}`)
-      //dar um get na conta e subtrair o valor do professor, adicionar o valor no aluno.
-    } catch {
-      throw new BadRequestException('Erro ao premiar aluno');
-    }
+  async premiar(createPremiacaoDto: CreatePremiacaoDto): Promise<void> {
+    await this.professorRepository.getAlunoById(createPremiacaoDto.alunoCpf);
+    const professor = await this.professorRepository.getProfessorById(createPremiacaoDto.professorCpf);
+
+    if (professor.conta.saldo < createPremiacaoDto.valor)
+      throw new BadRequestException('Saldo insuficiente');
+
+    await this.professorRepository.premiar(createPremiacaoDto.alunoCpf, createPremiacaoDto.professorCpf, createPremiacaoDto.valor);
   }
 }
