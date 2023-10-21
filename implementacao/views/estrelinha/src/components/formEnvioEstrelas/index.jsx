@@ -65,11 +65,13 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
         }
 
       } catch (error) {
+        console.log(error)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Usuário inválido',
+          text: `Erro: ${error.response.data.message}`,
         })
+        setOpendialog(false);
       }
     },
     [aluno.cpf, formData.valor, navigate, setOpendialog]
