@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Login from "./components/login"
-import CadastroEmpresa from "./components/cadastroEmpresa"
-import CadastroAluno from "./components/cadastroAluno"
+import Login from "./pages/login"
+import CadastroEmpresa from "./pages/cadastroEmpresa"
+import CadastroAluno from "./pages/cadastroAluno"
+import ContaProfessor from "./pages/contaProfessor"
+import ContaAluno from "./pages/contaAluno"
 
 const App = () => {
 
@@ -11,6 +13,8 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
         <Route path="/cadastro-aluno" element={<CadastroAluno />} />
+        <Route path="/conta-professor" element={<ContaProfessor />} />
+        <Route path="/conta-aluno" element={<ContaAluno />} />
       </Routes>
     </BrowserRouter>
   )

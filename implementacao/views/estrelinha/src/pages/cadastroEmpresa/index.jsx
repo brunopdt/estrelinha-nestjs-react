@@ -48,7 +48,7 @@ const CadastroEmpresa = () => {
   );
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center" }}>
+    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
       >
         <Box sx={{

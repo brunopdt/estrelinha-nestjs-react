@@ -1,4 +1,3 @@
-
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -33,6 +32,7 @@ const Login = () => {
       try {
         const resposta = await useApi.post("login", formData);
         localStorage.setItem("usuario", JSON.stringify(resposta));
+        console.log(resposta)
         Swal.fire({
           icon: 'success',
           position: 'top-end',
@@ -40,7 +40,11 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1000
         })
-        navigate("/");
+        if(resposta.data.rg)
+        {
+          navigate("/conta-aluno")
+        }
+        
       } catch (error) {
         Swal.fire({
           icon: 'error',
@@ -53,7 +57,7 @@ const Login = () => {
   );
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center" }}>
+    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <Box sx={{ display: "flex", gap: 5, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
       >
         <Box sx={{

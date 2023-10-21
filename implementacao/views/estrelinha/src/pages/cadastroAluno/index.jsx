@@ -8,6 +8,7 @@ const CadastroAluno = () => {
   const getCursoOptions = useCallback(async () => {
     try {
       const cursos = await useApi.get("/curso");
+      console.log(cursos)
       setCursoOptions(cursos.data);
       setCurso(cursos.data[0]);
     }
@@ -67,7 +68,7 @@ const CadastroAluno = () => {
   }, [getCursoOptions]);
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center" }} >
+    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}} >
       <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
       >
         <Box sx={{
