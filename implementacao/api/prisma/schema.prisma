@@ -22,6 +22,7 @@ model Aluno {
   instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
   curso         Curso       @relation(fields: [cursoId], references: [id])
   transacoes    Transacao[]
+  premiacoes    Premiacao[]
 }
 
 model Empresa {
@@ -51,6 +52,7 @@ model Professor {
   usuario       Usuario     @relation(fields: [nomeUsuario], references: [nomeUsuario])
   instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
   conta         Conta       @relation(fields: [contaId], references: [id])
+  premiacoes    Premiacao[]
 }
 
 model Instituicao {
@@ -58,6 +60,15 @@ model Instituicao {
   professores Professor[]
   cursos      Curso[]
   alunos      Aluno[]
+}
+
+model Premiacao {
+  id           Int       @id @default(autoincrement())
+  valor        Int
+  alunoCpf     String
+  aluno        Aluno     @relation(fields: [alunoCpf], references: [cpf])
+  professorCpf String
+  professor    Professor @relation(fields: [professorCpf], references: [cpf])
 }
 
 model Curso {
