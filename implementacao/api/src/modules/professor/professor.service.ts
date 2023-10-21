@@ -11,6 +11,8 @@ export class ProfessorService {
   }
 
   async premiar(createPremiacaoDto: CreatePremiacaoDto): Promise<void> {
+    if(createPremiacaoDto.valor <= 0) throw new BadRequestException('Valor inválido, deve ser maior que 0');
+
     await this.professorRepository.getAlunoById(createPremiacaoDto.alunoCpf);
     const professor = await this.professorRepository.getProfessorById(createPremiacaoDto.professorCpf);
 

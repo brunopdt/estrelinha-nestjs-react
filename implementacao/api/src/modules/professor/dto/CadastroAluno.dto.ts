@@ -1,4 +1,4 @@
-import { IsInt, IsString, MaxLength } from "class-validator";
+import { IsInt, IsPositive, IsString, MaxLength } from "class-validator";
 
 export class CreatePremiacaoDto {
   @IsString()
@@ -10,5 +10,6 @@ export class CreatePremiacaoDto {
   professorCpf: string;
 
   @IsInt()
+  @IsPositive()
   valor: number;
 }
