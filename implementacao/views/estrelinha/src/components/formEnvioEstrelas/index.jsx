@@ -6,9 +6,9 @@ import { useApi } from "../../api/axiosInstance";
 import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
-const FormEnvioEstrelas = ({setOpendialog, fetchlistaTransacoes}) => {
+const FormEnvioEstrelas = ({setOpendialog}) => {
   const [formData, setFormData] = useState({
-    valor: 0
+    valor: 1
   });
 
   const [aluno, setAluno] = useState({});
