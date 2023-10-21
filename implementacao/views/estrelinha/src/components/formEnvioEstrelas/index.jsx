@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useApi } from "../../api/axiosInstance";
 import Swal from "sweetalert2";
 
-const FormEnvioEstrelas = () => {
+// eslint-disable-next-line react/prop-types
+const FormEnvioEstrelas = ({setOpendialog, fetchlistaTransacoes}) => {
   const [formData, setFormData] = useState({
-    quantidadeMoedas: "",
-    senha: "",
+    valor: 0
   });
 
   const [aluno, setAluno] = useState({});
@@ -17,7 +17,7 @@ const FormEnvioEstrelas = () => {
   const getAlunoOptions = useCallback(async () => {
     try {
       const alunos = await useApi.get("/aluno");
-      console.log(alunos)
+      console.log(alunos, "aluno")
       setAlunoOptions(alunos.data);
       setAluno(alunos.data[0]);
     }
@@ -48,8 +48,10 @@ const FormEnvioEstrelas = () => {
     async (e) => {
       e.preventDefault();
       try {
-        const resposta = await useApi.post("", formData);
-
+        console.log("aqui")
+        const professorCpf = JSON.parse(localStorage.getItem("usuario")).data.cpf
+        console.log("Data Transacao",{ valor: Number(formData.valor),alunoCpf: aluno.cpf, professorCpf: professorCpf })
+        const resposta = await useApi.post("/professor/premiar",{ valor: Number(formData.valor),alunoCpf: aluno.cpf, professorCpf: professorCpf });
         Swal.fire({
           icon: 'success',
           position: 'top-end',
@@ -57,6 +59,7 @@ const FormEnvioEstrelas = () => {
           showConfirmButton: false,
           timer: 1000
         })
+        setOpendialog(false);
         if (resposta.data.rg) {
           navigate("/conta-aluno")
         }
@@ -69,7 +72,7 @@ const FormEnvioEstrelas = () => {
         })
       }
     },
-    [formData, navigate]
+    [aluno.cpf, formData.valor, navigate, setOpendialog]
   );
 
   return (
@@ -94,10 +97,11 @@ const FormEnvioEstrelas = () => {
             <TextField
               margin="normal"
               required
+              type="number"
               sx={{width: "350px"}}
-              label="Quantidade de Moedas"
-              name="quantidadeMoedas"
-              value={formData.quantidadeMoedas}
+              label="Quantidade de Estrelas"
+              name="valor"
+              value={formData.valor}
               autoFocus
               onChange={handleChange}
             />

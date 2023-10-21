@@ -48,6 +48,7 @@ const CadastroAluno = () => {
     async (e) => {
       e.preventDefault();
       try {
+        console.log({ ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId })
         const resposta = await useApi.post("/aluno", { ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId });
         localStorage.setItem("usuario", JSON.stringify(resposta));
         navigate("/");

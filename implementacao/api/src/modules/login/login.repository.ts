@@ -6,11 +6,12 @@ import { LoginDTO } from './dto/Login.dto';
 export class LoginRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async login(loginDto: LoginDTO): Promise<{Aluno, Empresa}> {
+  async login(loginDto: LoginDTO): Promise<{Aluno, Empresa, Professor}> {
     return await this.prisma.usuario.findFirstOrThrow({
       select: {
         Aluno: true,
         Empresa: true,
+        Professor: true
       },
       where: {
         nomeUsuario: loginDto.nomeUsuario,

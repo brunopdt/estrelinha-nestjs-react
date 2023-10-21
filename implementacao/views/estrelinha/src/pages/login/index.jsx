@@ -32,7 +32,7 @@ const Login = () => {
       try {
         const resposta = await useApi.post("login", formData);
         localStorage.setItem("usuario", JSON.stringify(resposta));
-        console.log(resposta)
+        console.log(resposta, "resposta do login")
         Swal.fire({
           icon: 'success',
           position: 'top-end',
@@ -43,6 +43,11 @@ const Login = () => {
         if(resposta.data.rg)
         {
           navigate("/conta-aluno")
+        }
+        if(resposta.data.cpnj){
+          navigate("/")
+        }else {
+          navigate("/conta-professor")
         }
         
       } catch (error) {
