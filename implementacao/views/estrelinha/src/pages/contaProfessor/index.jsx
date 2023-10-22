@@ -74,10 +74,10 @@ const ContaProfessor = () => {
         </Typography>
         {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
           return (
-            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 }}>
+            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 , marginTop: 3}}>
               <img className="estrela-lista" src={estrela} alt="" />
               <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
-                Ana Clara Lima recebeu {premiacao.valor} estrelas
+                Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!
               </Typography>
             </Box>
           )

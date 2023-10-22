@@ -40,16 +40,17 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1000
         })
-        if(resposta.data.rg)
-        {
+        console.log(resposta.data.rg)
+        if (resposta.data.rg) {
           navigate("/conta-aluno")
         }
-        if(resposta.data.cpnj){
+        if (resposta.data.cpnj) {
           navigate("/")
-        }else {
+        }
+        if (resposta.data.departamento) {
           navigate("/conta-professor")
         }
-        
+
       } catch (error) {
         Swal.fire({
           icon: 'error',
