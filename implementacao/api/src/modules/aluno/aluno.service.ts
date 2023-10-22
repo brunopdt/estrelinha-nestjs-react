@@ -36,4 +36,8 @@ export class AlunoService {
   async getAll() {
     return await this.alunoRepository.getAll();
   }
+
+  async getPremiacoes(nomeUsuario: string) {
+    return await this.alunoRepository.getPremiacoes(nomeUsuario);
+  }  
 }

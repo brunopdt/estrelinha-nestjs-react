@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { Aluno, Usuario } from '@prisma/client'
 
@@ -36,5 +36,26 @@ export class AlunoRepository {
 
   async getAll(): Promise<Aluno[]> {
     return await this.prisma.aluno.findMany({ orderBy: { conta: { saldo: 'desc' } }, include: { conta: true } })
+  }
+
+  async getPremiacoes(nomeUsuario: string) {
+    const aluno = await this.prisma.aluno.findFirst({
+      where: { nomeUsuario },
+      select: {
+        premiacoes: {include: {professor: {select: {nome: true}}}},
+        conta: {
+          select: {
+            saldo: true
+          }
+        } 
+      },
+    });
+
+    if (aluno)
+      return {
+        premiacoes: aluno.premiacoes,
+        saldo: aluno.conta.saldo
+      };
+    else throw new BadRequestException('Aluno não encontrado');
   }
 }

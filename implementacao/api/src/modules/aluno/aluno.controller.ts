@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { CadastroAlunoDTO } from './dto/CadastroAluno.dto';
 import { AlunoService } from './aluno.service';
 import { Aluno } from '@prisma/client';
@@ -16,6 +16,11 @@ export class AlunoController {
   @Get()
   async getAll(): Promise<Aluno[]> {
     return this.alunoService.getAll();
+  }
+
+  @Get('premiacoes/:nomeUsuario')
+  async getTransactions(@Param('nomeUsuario') nomeUsuario) {
+    return this.alunoService.getPremiacoes(nomeUsuario);
   }
 
 }
