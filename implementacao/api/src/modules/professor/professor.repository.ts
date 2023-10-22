@@ -10,7 +10,7 @@ export class ProfessorRepository {
     const professor = await this.prisma.professor.findFirst({
       where: { nomeUsuario },
       select: {
-        premiacoes: true,
+        premiacoes: {include: {aluno: {select: {nome: true}}}},
         conta: {
           select: {
             saldo: true
