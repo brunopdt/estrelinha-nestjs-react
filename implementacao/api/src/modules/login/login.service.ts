@@ -6,7 +6,7 @@ import { LoginRepository } from './login.repository';
 export class LoginService {
   constructor(private readonly loginRepository:LoginRepository ) {}
 
-  async login(loginDto: LoginDTO): Promise<{Aluno, Empresa}> {
+  async login(loginDto: LoginDTO): Promise<{Aluno, Empresa, Professor}> {
     try{
       return await this.loginRepository.login(loginDto);
     } catch (e) {

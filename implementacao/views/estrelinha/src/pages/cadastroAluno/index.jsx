@@ -8,6 +8,7 @@ const CadastroAluno = () => {
   const getCursoOptions = useCallback(async () => {
     try {
       const cursos = await useApi.get("/curso");
+      console.log(cursos)
       setCursoOptions(cursos.data);
       setCurso(cursos.data[0]);
     }
@@ -47,6 +48,7 @@ const CadastroAluno = () => {
     async (e) => {
       e.preventDefault();
       try {
+        console.log({ ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId })
         const resposta = await useApi.post("/aluno", { ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId });
         localStorage.setItem("usuario", JSON.stringify(resposta));
         navigate("/");
@@ -67,11 +69,11 @@ const CadastroAluno = () => {
   }, [getCursoOptions]);
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center" }} >
+    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}} >
       <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
       >
         <Box sx={{
-          marginTop: 12,
+          marginTop:  7,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -84,7 +86,7 @@ const CadastroAluno = () => {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 3 }}
           >
             <Box sx={{ display: "flex", gap: 1 }}>
               <TextField
@@ -95,6 +97,7 @@ const CadastroAluno = () => {
                 name="nomeUsuario"
                 value={formData.nomeUsuario}
                 onChange={handleChange}
+                sx={{margin: "5px 0px"}}
               />
               <TextField
                 margin="normal"
@@ -105,6 +108,7 @@ const CadastroAluno = () => {
                 type="password"
                 value={formData.senha}
                 onChange={handleChange}
+                sx={{margin: "5px 0px"}}
               />
             </Box>
             <TextField
@@ -116,6 +120,7 @@ const CadastroAluno = () => {
               type="email"
               value={formData.email}
               onChange={handleChange}
+              sx={{margin: "5px 0px"}}
             />
             <TextField
               margin="normal"
@@ -125,6 +130,7 @@ const CadastroAluno = () => {
               name="nome"
               value={formData.nomeFantasia}
               onChange={handleChange}
+              sx={{margin: "5px 0px"}}
             />
 
             <Box sx={{ display: "flex", gap: 1 }}>
@@ -136,6 +142,7 @@ const CadastroAluno = () => {
                 name="cpf"
                 value={formData.nomeFantasia}
                 onChange={handleChange}
+                sx={{margin: "5px 0px"}}
               />
               <TextField
                 margin="normal"
@@ -146,6 +153,7 @@ const CadastroAluno = () => {
                 type="text"
                 value={formData.cnpj}
                 onChange={handleChange}
+                sx={{margin: "5px 0px"}}
               />
             </Box>
             <TextField
@@ -157,6 +165,7 @@ const CadastroAluno = () => {
               type="text"
               value={formData.endereco}
               onChange={handleChange}
+              sx={{margin: "5px 0px"}}
             />
             {cursoOptions.length > 0 ? (
               <Autocomplete
@@ -183,26 +192,30 @@ const CadastroAluno = () => {
               fullWidth
               variant="contained"
               sx={{
-                mt: 3, mb: 1, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
+                mt: 2, mb: 1, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
                   backgroundColor: '#7F4AA4', color: '#FBB80F'
                 }
               }}
             >
               CADASTRAR
             </Button>
+            <Typography component="h1" variant="h5" sx={{textAlign: "center", color: "#7F4AA4", marginTop: 3, fontWeight: 800, fontSize: 18 }}>
+              Já tem uma conta?
+            </Typography>
             <Button
               onClick={() => navigate("/")}
               fullWidth
               variant="text"
               sx={{
-                mb: 3, fontWeight: 800, color: "#7F4AA4"
+                mt: 1, mb: 5, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
+                  backgroundColor: '#7F4AA4', color: '#FBB80F'}
               }}
             >
               LOGIN
             </Button>
           </Box>
         </Box>
-        <Box className="imagem-cadastro">
+        <Box className="imagem-cadastro" sx={{marginTop: 11}}>
 
         </Box>
       </Box>

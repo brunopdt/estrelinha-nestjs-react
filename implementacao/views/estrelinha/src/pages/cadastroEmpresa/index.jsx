@@ -48,11 +48,11 @@ const CadastroEmpresa = () => {
   );
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center" }}>
+    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
       >
         <Box sx={{
-          marginTop: 12,
+          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -113,19 +113,23 @@ const CadastroEmpresa = () => {
               fullWidth
               variant="contained"
               sx={{
-                mt: 3, mb: 2, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
+                mt: 3, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
                   backgroundColor: '#7F4AA4', color: '#FBB80F'
                 }
               }}
             >
               CADASTRAR
             </Button>
+            <Typography component="h1" variant="h5" sx={{ color: "#7F4AA4", marginTop: 3, fontWeight: 800, fontSize: 18, textAlign: "center" }}>
+              Já tem uma conta?
+            </Typography>
             <Button
               onClick={() => navigate("/")}
               fullWidth
               variant="text"
               sx={{
-                mb: 3, fontWeight: 800, color: "#7F4AA4"
+                mt: 1, mb: 5, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, ":hover": {
+                  backgroundColor: '#7F4AA4', color: '#FBB80F'}
               }}
             >
               LOGIN
