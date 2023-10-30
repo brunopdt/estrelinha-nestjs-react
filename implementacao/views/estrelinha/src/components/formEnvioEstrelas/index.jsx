@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 // eslint-disable-next-line react/prop-types
 const FormEnvioEstrelas = ({setOpendialog}) => {
   const [formData, setFormData] = useState({
-    valor: 1
+    valor: 1,
+    descricao: "",
   });
 
   const [aluno, setAluno] = useState({});
@@ -48,10 +49,10 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
     async (e) => {
       e.preventDefault();
       try {
-        console.log("aqui")
         const professorCpf = JSON.parse(localStorage.getItem("usuario")).data.cpf
         console.log("Data Transacao",{ valor: Number(formData.valor),alunoCpf: aluno.cpf, professorCpf: professorCpf })
-        const resposta = await useApi.post("/professor/premiar",{ valor: Number(formData.valor),alunoCpf: aluno.cpf, professorCpf: professorCpf });
+        const resposta = await useApi.post("/professor/premiar",{ valor: Number(formData.valor),alunoCpf: aluno.cpf, professorCpf: professorCpf, descricao: formData.descricao  });
+
         Swal.fire({
           icon: 'success',
           position: 'top-end',
@@ -59,7 +60,9 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
           showConfirmButton: false,
           timer: 1000
         })
+
         setOpendialog(false);
+
         if (resposta.data.rg) {
           navigate("/conta-aluno")
         }
@@ -74,7 +77,7 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
         setOpendialog(false);
       }
     },
-    [aluno.cpf, formData.valor, navigate, setOpendialog]
+    [aluno.cpf, formData.descricao, formData.valor, navigate, setOpendialog]
   );
 
   return (
@@ -105,6 +108,15 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
               name="valor"
               value={formData.valor}
               autoFocus
+              onChange={handleChange}
+            />
+             <TextField
+              margin="normal"
+              required
+              sx={{width: "350px"}}
+              label="Descrição"
+              name="descricao"
+              value={formData.descricao}
               onChange={handleChange}
             />
 

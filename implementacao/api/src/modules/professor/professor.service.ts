@@ -19,6 +19,6 @@ export class ProfessorService {
     if (professor.conta.saldo < createPremiacaoDto.valor)
       throw new BadRequestException('Saldo insuficiente');
 
-    await this.professorRepository.premiar(createPremiacaoDto.alunoCpf, createPremiacaoDto.professorCpf, createPremiacaoDto.valor);
+    await this.professorRepository.premiar(createPremiacaoDto.alunoCpf, createPremiacaoDto.professorCpf, createPremiacaoDto.valor, createPremiacaoDto.descricao);
   }
 }

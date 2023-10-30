@@ -19,7 +19,6 @@ const ContaProfessor = () => {
     try {
       const nomeUsuario = JSON.parse(localStorage.getItem("usuario")).data.nomeUsuario
       const data = await useApi.get(`/professor/transacoes/${nomeUsuario}`);
-      console.log(data, "Dentro da lista")
       setlistaTransacoes(data);
       setDadosCarregados(true);
     } catch (error) {
@@ -61,7 +60,7 @@ const ContaProfessor = () => {
 
             <Dialog open={openDialog} onClose={() => setOpendialog(false)}>
               <Box sx={{ margin: "50px 10px" }}>
-                <FormEnvioEstrelas setOpendialog={setOpendialog} fetchlistaTransacoes={fetchlistaTransacoes} />
+                <FormEnvioEstrelas setOpendialog={setOpendialog} />
               </Box>
             </Dialog>
           </Box>
@@ -74,7 +73,7 @@ const ContaProfessor = () => {
         </Typography>
         {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
           return (
-            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 , marginTop: 3}}>
+            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 , marginTop: 3}} className="list-item">
               <img className="estrela-lista" src={estrela} alt="" />
               <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
                 Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!

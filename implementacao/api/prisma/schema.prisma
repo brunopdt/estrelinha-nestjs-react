@@ -65,6 +65,7 @@ model Instituicao {
 model Premiacao {
   id           Int       @id @default(autoincrement())
   valor        Int
+  descricao    String
   alunoCpf     String
   aluno        Aluno     @relation(fields: [alunoCpf], references: [cpf])
   professorCpf String

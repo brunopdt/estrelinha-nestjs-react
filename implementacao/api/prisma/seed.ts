@@ -124,12 +124,14 @@ async function seed() {
         alunoCpf: "1234567890",
         id: 1,
         professorCpf: "12345",
+        descricao: "ótimo comportamento",
         valor: 10,
       },
       {
         alunoCpf: "123",
         id: 2,
         professorCpf: "123456",
+        descricao: "alunx muitx bonite",
         valor: 20,
       },
     ]

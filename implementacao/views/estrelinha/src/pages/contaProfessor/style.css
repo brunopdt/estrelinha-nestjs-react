@@ -1,16 +1,17 @@
-body{
+body {
   margin: 0;
   padding: 0;
 }
 
-.estrela{
+.estrela {
   margin-top: 7px;
   width: 40px;
   height: 40px;
 }
 
-.estrela-lista{
-  margin-top: 3px;
-  width: 40px;
-  height: 40px;
+.estrela-lista {
+  width: 25px;
+  margin-top: 12px;
+  height: 25px;
+  margin: 'auto 0';
 }

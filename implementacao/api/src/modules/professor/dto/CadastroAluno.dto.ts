@@ -12,4 +12,8 @@ export class CreatePremiacaoDto {
   @IsInt()
   @IsPositive()
   valor: number;
+
+  @IsString()
+  @MaxLength(255)
+  descricao: string;
 }

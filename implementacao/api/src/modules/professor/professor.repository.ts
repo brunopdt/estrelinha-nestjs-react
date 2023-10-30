@@ -55,7 +55,7 @@ export class ProfessorRepository {
     else throw new BadRequestException('Professor não encontrado');
   }
 
-  async premiar(alunoCpf: string, professorCpf: string, valor: number): Promise<void> {
+  async premiar(alunoCpf: string, professorCpf: string, valor: number, descricao: string): Promise<void> {
     await this.prisma.$transaction(async (tx) => {
       await tx.aluno.update({
         where: { cpf: alunoCpf },
@@ -86,6 +86,7 @@ export class ProfessorRepository {
       await tx.premiacao.create({
         data: {
           valor,
+          descricao,
           aluno: {
             connect: {
               cpf: alunoCpf
