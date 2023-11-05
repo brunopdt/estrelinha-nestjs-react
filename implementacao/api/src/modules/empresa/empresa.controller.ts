@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { EmpresaService } from './empresa.service';
 import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
+import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
 import { Empresa } from '@prisma/client';
 
 @Controller('empresa')
@@ -27,5 +28,11 @@ export class EmpresaController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.empresaService.findOne(id);
+  }
+
+  @Post('transacao')
+  async insertVantagem(@Body() body: CreateVantagemDto): Promise<{success: boolean}> {
+    await this.empresaService.insertVantagem(body);
+    return {success: true};
   }
 }

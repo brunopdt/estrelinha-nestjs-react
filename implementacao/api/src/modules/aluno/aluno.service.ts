@@ -39,5 +39,9 @@ export class AlunoService {
 
   async getPremiacoes(nomeUsuario: string) {
     return await this.alunoRepository.getPremiacoes(nomeUsuario);
-  }  
+  }
+
+  async getVantagens() {
+    return await this.alunoRepository.getVantagens();
+  }
 }

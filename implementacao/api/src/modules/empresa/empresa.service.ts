@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
 import { EmpresaRepository } from './empresa.repository';
 import { Empresa, Usuario } from '@prisma/client';
+import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
 
 @Injectable()
 export class EmpresaService {
@@ -31,5 +32,9 @@ export class EmpresaService {
 
   async findOne(cnpj: string): Promise<Empresa> {
     return this.empresasRepository.findOne(cnpj);
+  }
+
+  async insertVantagem(transacao: CreateVantagemDto): Promise<void> {
+    await this.empresasRepository.insertVantagem(transacao);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { Empresa, Usuario } from '@prisma/client';
+import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
 
 @Injectable()
 export class EmpresaRepository {
@@ -28,6 +29,21 @@ export class EmpresaRepository {
   async findOne(cnpj: string): Promise<Empresa> {
     return this.prisma.empresa.findUnique({
       where: { cnpj },
+    });
+  }
+
+  async insertVantagem(vantagem: CreateVantagemDto): Promise<void> {
+    console.log(vantagem);
+    const insertedVantagem = {...vantagem, empresaCnpj: undefined}
+    await this.prisma.vantagem.create({
+      data: {
+        ...insertedVantagem,
+        empresa: {
+          connect: {
+            cnpj: vantagem.empresaCnpj,
+          },
+        },
+      } as any,
     });
   }
 

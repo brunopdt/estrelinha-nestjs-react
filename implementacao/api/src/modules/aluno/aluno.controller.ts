@@ -23,4 +23,8 @@ export class AlunoController {
     return this.alunoService.getPremiacoes(nomeUsuario);
   }
 
+  @Get('vantagens')
+  async getVantagens() {
+    return this.alunoService.getVantagens();
+  }
 }

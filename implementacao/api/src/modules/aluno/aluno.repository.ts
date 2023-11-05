@@ -58,4 +58,8 @@ export class AlunoRepository {
       };
     else throw new BadRequestException('Aluno não encontrado');
   }
+
+  async getVantagens() {
+    return await this.prisma.vantagem.findMany({ include: { empresa: true } });
+  }
 }

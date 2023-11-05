@@ -1,16 +1,17 @@
-import { Aluno, Conta, Premiacao, PrismaClient, Professor, Usuario } from '@prisma/client';
+import { Aluno, Conta, Empresa, Premiacao, PrismaClient, Professor, Usuario, Vantagem } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function seed() {
   try {
 
-    // await prisma.aluno.deleteMany({});
-    // await prisma.curso.deleteMany({});
-    // await prisma.professor.deleteMany({});
-    // await prisma.usuario.deleteMany({});
-    // await prisma.conta.deleteMany({});
-    // await prisma.instituicao.deleteMany({});
+    await prisma.premiacao.deleteMany({});
+    await prisma.aluno.deleteMany({});
+    await prisma.curso.deleteMany({});
+    await prisma.professor.deleteMany({});
+    await prisma.usuario.deleteMany({});
+    await prisma.conta.deleteMany({});
+    await prisma.instituicao.deleteMany({}); 
     // return;
 
     const instituicoes = [
@@ -57,6 +58,14 @@ async function seed() {
       },
       {
         nomeUsuario: "aluno2",
+        senha: "12345",
+      },
+      {
+        nomeUsuario: "empresa1",
+        senha: "12345",
+      },
+      {
+        nomeUsuario: "empresa2",
         senha: "12345",
       }
     ];
@@ -136,6 +145,50 @@ async function seed() {
       },
     ]
 
+    const empresas: Empresa[] = [
+      {
+       cnpj: "1234567890",
+       nomeFantasia: "empresa 1",
+       nomeUsuario: "empresa1",
+      },
+      {
+        cnpj: "0987654321",
+        nomeFantasia: "empresa 2",
+        nomeUsuario: "empresa2",
+       },
+    ]
+
+    const vantagens: Vantagem[] = [
+      {
+        empresaCnpj: "1234567890",
+        fotoKey: "foto",
+        id: 1,
+        nome: "Carrinho da Hot Wheels",
+        valor: 10,
+      },
+      {
+        empresaCnpj: "1234567890",
+        fotoKey: "foto",
+        id: 2,
+        nome: "Pista Ataque do Tubarão",
+        valor: 100,
+      },
+      {
+        empresaCnpj: "0987654321",
+        fotoKey: "foto",
+        id: 3,
+        nome: "Audi RS 5 Coupé 2015 4.2 FSI V8 450cv Tiptronic Quattro",
+        valor: 800000,
+      },
+      {
+        empresaCnpj: "0987654321",
+        fotoKey: "foto",
+        id: 4,
+        nome: "Borboleta de brinquedo",
+        valor: 5,
+      },
+    ]
+
     await prisma.instituicao.createMany({ data: instituicoes });
     await prisma.usuario.createMany({ data: usuarios });
     await prisma.conta.createMany({ data: contas });
@@ -143,6 +196,8 @@ async function seed() {
     await prisma.curso.createMany({ data: cursos });
     await prisma.aluno.createMany({ data: alunos });
     await prisma.premiacao.createMany({ data: premiacoes });
+    await prisma.empresa.createMany({ data: empresas });
+    await prisma.vantagem.createMany({ data: vantagens });
   } catch (error) {
     console.error('Error seeding data:', error);
   } finally {
