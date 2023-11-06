@@ -1,7 +1,9 @@
 <div style="display: flex;">
-  <img style="width: 100px" src="https://seeklogo.com/images/S/spring-logo-9A2BC78AAF-seeklogo.com.png">
+  <img style="width: 100px" src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png">
   <img style="width: 100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png"
 </div>
+
+
   
 # Estrelinha - NestJS | React
 
