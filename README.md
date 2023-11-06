@@ -1,10 +1,13 @@
 <div style="display: flex;">
-  <img style="width: 100px" src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png">
-  <img style="width: 100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png"
+  <img style="width: 70px" src="https://seeklogo.com/images/P/prisma-logo-BE375CFB25-seeklogo.com.png">
+  <img style="width: 70px" src="https://seeklogo.com/images/D/draw-io-logo-59133ABE5E-seeklogo.com.png">
+  <img style="width: 70px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png">
+  <img style="width: 70px" src="https://seeklogo.com/images/T/typescript-logo-27C45A95A6-seeklogo.com.png">
+  <img style="width: 70px" src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png">
+  <img style="width: 70px" src="https://seeklogo.com/images/M/microsoft-azure-logo-85055C44BE-seeklogo.com.png">
+ 
 </div>
 
-
-  
 # Estrelinha - NestJS | React
 
 
