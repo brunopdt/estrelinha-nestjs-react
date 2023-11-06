@@ -35,3 +35,14 @@
   background-repeat: no-repeat;
   border-radius: 0px 10px 10px 0px;
 }
+
+.imagem-vantagem{
+  background-image: url(./assets/imagem-vantagem.png);
+  width: 500px;
+  height: 500px;
+  margin: 80px 5px;
+  margin-left: -70px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0px 10px 10px 0px;
+}

@@ -4,6 +4,8 @@ import CadastroEmpresa from "./pages/cadastroEmpresa"
 import CadastroAluno from "./pages/cadastroAluno"
 import ContaProfessor from "./pages/contaProfessor"
 import ContaAluno from "./pages/contaAluno"
+import CadastroVantagem from "./pages/cadastroVantagens"
+import LojaAluno from "./pages/lojaAluno"
 
 const App = () => {
 
@@ -15,6 +17,8 @@ const App = () => {
         <Route path="/cadastro-aluno" element={<CadastroAluno />} />
         <Route path="/conta-professor" element={<ContaProfessor />} />
         <Route path="/conta-aluno" element={<ContaAluno />} />
+        <Route path="/cadastro-vantagem" element={<CadastroVantagem />} />
+        <Route path="/loja-aluno" element={<LojaAluno />} />
       </Routes>
     </BrowserRouter>
   )

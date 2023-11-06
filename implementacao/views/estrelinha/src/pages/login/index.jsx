@@ -40,12 +40,12 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1000
         })
-        console.log(resposta.data.rg)
         if (resposta.data.rg) {
           navigate("/conta-aluno")
         }
-        if (resposta.data.cpnj) {
-          navigate("/")
+        if (resposta.data.cnpj) {
+          console.log("aqui")
+          navigate("/cadastro-vantagem")
         }
         if (resposta.data.departamento) {
           navigate("/conta-professor")

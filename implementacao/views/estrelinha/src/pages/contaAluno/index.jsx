@@ -6,9 +6,10 @@ import imagemSaldo from "../../assets/saldo-imagem.png"
 import estrela from "../../assets/Star.png"
 
 import "../contaProfessor/style.css"
+import { useNavigate } from "react-router-dom";
 
 const ContaAluno = () => {
-  const [openDialog, setOpendialog] = useState(false)
+  const navigate = useNavigate();
 
   const [listaTransacoes, setlistaTransacoes] = useState([]);
   const [dadosCarregados, setDadosCarregados] = useState(false);
@@ -27,7 +28,8 @@ const ContaAluno = () => {
 
   useEffect(() => {
     fetchlistaTransacoes();
-  }, [openDialog]);
+  }, []);
+
 
   return (
     <Box component="main" sx={{ display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: "#FFFFFF", minHeight: "100vh", margin: 0 }}>
@@ -55,12 +57,8 @@ const ContaAluno = () => {
                 ":hover": {
                   backgroundColor: "#FBB80F", color: "#7F4AA4"
                 }
-              }} onClick={() => setOpendialog(true)}>Ver loja</Button>
+              }} onClick={()=>navigate("/loja-aluno")}>Ver loja</Button>
 
-            <Dialog open={openDialog} onClose={() => setOpendialog(false)}>
-              <Box sx={{ margin: "50px 10px" }}>
-              </Box>
-            </Dialog>
           </Box>
 
         </Box>
