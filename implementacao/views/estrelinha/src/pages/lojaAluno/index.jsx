@@ -36,7 +36,7 @@ const LojaAluno = () => {
           {dadosCarregados ? listaVantagens.data.map((vantagem) => {
             return (
               <Box key={vantagem.nome} sx={{ border: "3px solid #7F4AA4", padding: "10px 10px", borderRadius: "10px", textAlign: "center" }}>
-                <img className="estrela-lista" src="" alt="" />
+                <img className="estrela-lista" src={vantagem.fotoKey} alt="" />
                 <Typography component="h3" variant="h3" sx={{ paddingTop: "3px", color: "#000000", fontSize: "20px" }}>
                   <b>Nome:</b> {vantagem.nome}
                 </Typography>

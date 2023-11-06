@@ -15,5 +15,4 @@ export class ProfessorController {
   async premiar(@Body() createPremiacaoDto: CreatePremiacaoDto): Promise<void> {
     return this.professorService.premiar(createPremiacaoDto);
   }
-
 }

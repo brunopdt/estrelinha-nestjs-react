@@ -3,6 +3,7 @@ import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
 import { EmpresaRepository } from './empresa.repository';
 import { Empresa, Usuario } from '@prisma/client';
 import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
+import * as azurestorage from 'azure-storage';
 
 @Injectable()
 export class EmpresaService {
@@ -35,6 +36,14 @@ export class EmpresaService {
   }
 
   async insertVantagem(transacao: CreateVantagemDto): Promise<void> {
-    await this.empresasRepository.insertVantagem(transacao);
+    const blobSvc = azurestorage.createBlobService("DefaultEndpointsProtocol=https;AccountName=estrelinha;AccountKey=OKG7phoBGXMgHkmFTGcye6mae5Dg8PqZpcxoHGy/ssefL4y6LhLclmNWrtB69LuKXzeWPqz6+sOb+AStxviuzg==;EndpointSuffix=core.windows.net");
+    const fileName = `${transacao.empresaCnpj}-${transacao.nome}-${transacao.valor}.jpg`;
+    const containerName = 'estrelinha';
+    const imageBuffer = transacao.fotoKey;
+
+    await blobSvc.createBlockBlobFromText(containerName, fileName, imageBuffer, () => {});
+    const imageUrl = await blobSvc.getUrl(containerName, fileName);
+
+    await this.empresasRepository.insertVantagem(transacao, imageUrl);
   }
 }
