@@ -1,7 +1,7 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { CadastroAlunoDTO } from './dto/CadastroAluno.dto';
 import { AlunoRepository } from './aluno.repository';
-import { Aluno, Usuario } from '@prisma/client'
+import { Aluno, Transacao, Usuario, Vantagem } from '@prisma/client'
 
 @Injectable()
 export class AlunoService {
@@ -33,7 +33,7 @@ export class AlunoService {
     return await this.alunoRepository.cadastrarAluno(aluno, usuario, foreignKeys);
   }
 
-  async getAll() {
+  async getAll(): Promise<Aluno[]> {
     return await this.alunoRepository.getAll();
   }
 
@@ -41,7 +41,18 @@ export class AlunoService {
     return await this.alunoRepository.getPremiacoes(nomeUsuario);
   }
 
-  async getVantagens() {
+  async getTransacoes(nomeUsuario: string): Promise<Transacao[]> {
+    return await this.alunoRepository.getTransacoes(nomeUsuario);
+  }
+
+  async getVantagens(): Promise<Vantagem[]> {
     return await this.alunoRepository.getVantagens();
+  }
+
+  async comprarVantagem(nomeUsuario: string, vantagemId: number): Promise<void> {
+    const aluno = await this.alunoRepository.findAlunoByNomeUsuario(nomeUsuario);
+    if(!aluno) throw new BadRequestException('Aluno não encontrado');
+
+    return await this.alunoRepository.comprarVantagem(nomeUsuario, vantagemId, aluno);
   }
 }

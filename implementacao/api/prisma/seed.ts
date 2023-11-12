@@ -161,28 +161,28 @@ async function seed() {
     const vantagens: Vantagem[] = [
       {
         empresaCnpj: "1234567890",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 1,
         nome: "Carrinho da Hot Wheels",
         valor: 10,
       },
       {
         empresaCnpj: "1234567890",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 2,
         nome: "Pista Ataque do Tubarão",
         valor: 100,
       },
       {
         empresaCnpj: "0987654321",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-dente%20de%20le%C3%A3o-78.jpg",
         id: 3,
         nome: "Audi RS 5 Coupé 2015 4.2 FSI V8 450cv Tiptronic Quattro",
         valor: 800000,
       },
       {
         empresaCnpj: "0987654321",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-dente%20de%20le%C3%A3o-78.jpg",
         id: 4,
         nome: "Borboleta de brinquedo",
         valor: 5,
