@@ -3,9 +3,7 @@ import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
 import { EmpresaRepository } from './empresa.repository';
 import { Empresa, Usuario } from '@prisma/client';
 import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
-import * as azurestorage from 'azure-storage';
-import { Readable } from 'stream';
-import { BlobServiceClient, BlockBlobClient } from '@azure/storage-blob';
+import { BlobServiceClient } from '@azure/storage-blob';
 
 @Injectable()
 export class EmpresaService {
