@@ -12,20 +12,33 @@ import FormEnvioEstrelas from "../../components/formEnvioEstrelas";
 const ContaProfessor = () => {
   const [openDialog, setOpendialog] = useState(false)
 
-  const [listaTransacoes, setlistaTransacoes] = useState([]);
+  const [listaTransacoes, setListaTransacoes] = useState([]);
+  const [listaAlunos, setListaAlunos] = useState([]);
   const [dadosCarregados, setDadosCarregados] = useState(false);
+  const [dadosCarregadosAlunos, setDadosCarregadosAlunos] = useState(false);
 
   const fetchlistaTransacoes = async () => {
     try {
       const nomeUsuario = JSON.parse(localStorage.getItem("usuario")).data.nomeUsuario
       const data = await useApi.get(`/professor/transacoes/${nomeUsuario}`);
-      setlistaTransacoes(data);
+      setListaTransacoes(data);
+      fetchlistaAlunos()
       setDadosCarregados(true);
     } catch (error) {
       console.error('Erro na requisição:', error);
     }
   };
 
+  const fetchlistaAlunos = async () => {
+    try {
+      const data = await useApi.get(`/aluno`);
+      console.log(data)
+      setListaAlunos(data);
+      setDadosCarregadosAlunos(true);
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+  };
   useEffect(() => {
     fetchlistaTransacoes();
   }, [openDialog]);
@@ -67,23 +80,41 @@ const ContaProfessor = () => {
 
         </Box>
       </Box >
+      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
       <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
         <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
           Transações
         </Typography>
         {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
           return (
-            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 , marginTop: 3}} className="list-item">
+            <Box key={premiacao.id} sx={{ display: "flex", gap: 2, marginTop: 3 }} className="list-item">
               <img className="estrela-lista" src={estrela} alt="" />
               <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
                 Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!
               </Typography>
             </Box>
+            
           )
         }) : console.log(listaTransacoes)}
 
       </Box>
-    </Box >
+      <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
+        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
+          Top Alunos
+        </Typography>
+        {dadosCarregadosAlunos ? listaAlunos.data.map((aluno) => {
+          return (
+            <Box key={aluno.cpf} sx={{ display: "flex", gap: 2, marginTop: 3}} className="list-item">
+              <img className="estrela-lista" src={estrela} alt="" />
+              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
+                {aluno.nome}
+              </Typography>
+            </Box>
+          )
+        }) : console.log(listaTransacoes)}
+      </Box>
+    </Box>
+    </Box>
   );
 };
 

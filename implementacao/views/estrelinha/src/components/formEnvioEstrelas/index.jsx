@@ -18,7 +18,6 @@ const FormEnvioEstrelas = ({setOpendialog}) => {
   const getAlunoOptions = useCallback(async () => {
     try {
       const alunos = await useApi.get("/aluno");
-      console.log(alunos, "aluno")
       setAlunoOptions(alunos.data);
       setAluno(alunos.data[0]);
     }

@@ -26,7 +26,7 @@ async function seed() {
         email: "aluno@email.com",
         endereco: "rua 3",
         instituicaoId: 1,
-        nome: "aluno 1",
+        nome: "Everson",
         nomeUsuario: "aluno1",
         rg: "123456",
       },
@@ -37,7 +37,7 @@ async function seed() {
         email: "aluno2@email.com",
         endereco: "rua 2",
         instituicaoId: 1,
-        nome: "aluno 2",
+        nome: "Joana",
         nomeUsuario: "aluno2",
         rg: "1234567",
       }
@@ -81,11 +81,11 @@ async function seed() {
       },
       {
         id: 3,
-        saldo: 0,
+        saldo: 50,
       },
       {
         id: 4,
-        saldo: 0,
+        saldo: 20,
       }
     ]
 
@@ -112,7 +112,7 @@ async function seed() {
         cpf: "12345",
         departamento: "computação",
         endereco: "rua 1",
-        nome: "professor 1",
+        nome: "Rafael",
         instituicaoId: 1,
         contaId: 1,
         nomeUsuario: "prof1",
@@ -121,7 +121,7 @@ async function seed() {
         cpf: "123456",
         departamento: "filosofia",
         endereco: "rua 2",
-        nome: "professor 2",
+        nome: "Ana",
         instituicaoId: 1,
         contaId: 2,
         nomeUsuario: "prof2",
@@ -134,7 +134,7 @@ async function seed() {
         id: 1,
         professorCpf: "12345",
         descricao: "ótimo comportamento",
-        valor: 10,
+        valor: 50,
       },
       {
         alunoCpf: "123",
@@ -148,12 +148,12 @@ async function seed() {
     const empresas: Empresa[] = [
       {
        cnpj: "1234567890",
-       nomeFantasia: "empresa 1",
+       nomeFantasia: "Bitz",
        nomeUsuario: "empresa1",
       },
       {
         cnpj: "0987654321",
-        nomeFantasia: "empresa 2",
+        nomeFantasia: "Tech",
         nomeUsuario: "empresa2",
        },
     ]
@@ -164,20 +164,20 @@ async function seed() {
         fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 1,
         nome: "Carrinho da Hot Wheels",
-        valor: 10,
+        valor: 2,
       },
       {
         empresaCnpj: "1234567890",
         fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 2,
         nome: "Pista Ataque do Tubarão",
-        valor: 100,
+        valor: 8,
       },
       {
         empresaCnpj: "0987654321",
         fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-dente%20de%20le%C3%A3o-78.jpg",
         id: 3,
-        nome: "Audi RS 5 Coupé 2015 4.2 FSI V8 450cv Tiptronic Quattro",
+        nome: "Audi RS 5 Coupé",
         valor: 800000,
       },
       {
