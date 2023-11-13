@@ -1,17 +1,14 @@
-
 import { Box, Typography, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useApi } from "../../api/axiosInstance";
-import teste from "../../assets/cadastro.png"
 import estrela from "../../assets/Star.png"
 
 const HomeEmpresa = () => {
 
   const [listaVantagens, setListaVantagens] = useState([]);
   const [dadosCarregados, setDadosCarregados] = useState(false);
-  const [imageURLs, setImageURLs] = useState('');
 
   const fetchlistaVantagens = async () => {
     try {
@@ -40,7 +37,7 @@ const HomeEmpresa = () => {
           {dadosCarregados ? listaVantagens.data.map((vantagem) => {
             return (
               <Box key={vantagem.nome} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", border: "1px solid #7F4AA4", borderRadius: "10px", textAlign: "left", width: "300px", height: "425px", boxShadow: "rgba(0, 0, 0, 0.15) 5px 5px 2.6px;" }}>
-                <img className="card-vantagens" src={teste} alt="Card Imagem" />
+                <img className="card-vantagens" src={vantagem.nome} alt="Card Imagem" />
                 <Typography component="h3" variant="h3" sx={{ padding: "20px", color: "#000000", fontSize: "22px" }}>
                   {vantagem.nome}
                 </Typography>
