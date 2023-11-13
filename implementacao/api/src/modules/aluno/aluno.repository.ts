@@ -39,6 +39,9 @@ export class AlunoRepository {
       where: {
         nomeUsuario,
       },
+      include: {
+        conta: true
+      }
     });
   }
 
@@ -89,11 +92,13 @@ export class AlunoRepository {
     return await this.prisma.vantagem.findMany({ include: { empresa: true } });
   }
 
-  async comprarVantagem(nomeUsuario: string, vantagemId: number, aluno: Aluno): Promise<void> {
+  async comprarVantagem(nomeUsuario: string, vantagemId: number, aluno): Promise<void> {
     await this.prisma.$transaction(
       async (tx) => {
         const vantagem = await tx.vantagem.findUnique({ where: { id: vantagemId } });
         if (!vantagem) throw new BadRequestException('Vantagem não encontrada');
+
+        if(aluno.conta.saldo < vantagem.valor) throw new BadRequestException('Saldo insuficiente');
 
         await tx.aluno.update({
           where: { nomeUsuario },
