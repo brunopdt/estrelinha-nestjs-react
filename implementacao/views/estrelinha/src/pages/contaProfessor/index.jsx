@@ -82,14 +82,14 @@ const ContaProfessor = () => {
       </Box >
       <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
       <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
-        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
+        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px" }}>
           Transações
         </Typography>
         {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
           return (
-            <Box key={premiacao.id} sx={{ display: "flex", gap: 2, marginTop: 3 }} className="list-item">
+            <Box key={premiacao.id} sx={{ display: "flex", gap: 2, marginTop: 1 }} className="list-item">
               <img className="estrela-lista" src={estrela} alt="" />
-              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
+              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
                 Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!
               </Typography>
             </Box>
@@ -99,14 +99,14 @@ const ContaProfessor = () => {
 
       </Box>
       <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
-        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
+        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px" }}>
           Top Alunos
         </Typography>
         {dadosCarregadosAlunos ? listaAlunos.data.map((aluno) => {
           return (
-            <Box key={aluno.cpf} sx={{ display: "flex", gap: 2, marginTop: 3}} className="list-item">
+            <Box key={aluno.cpf} sx={{ display: "flex", gap: 2, marginTop: 1}} className="list-item">
               <img className="estrela-lista" src={estrela} alt="" />
-              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
+              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
                 {aluno.nome}
               </Typography>
             </Box>

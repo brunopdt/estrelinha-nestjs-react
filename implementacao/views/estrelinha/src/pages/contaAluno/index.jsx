@@ -78,14 +78,14 @@ const ContaAluno = () => {
       </Box >
       <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2}}>
         <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px", marginLeft: 1 }}>
-          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
+          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px" }}>
             Estrelas Recebidas
           </Typography>
           {dadosCarregados ? listaPremiacoes.data.premiacoes.map((premiacao) => {
             return (
-              <Box key={premiacao.id} sx={{ display: "flex", gap: 2, marginTop: 3 }}>
+              <Box key={premiacao.id} sx={{ display: "flex", gap: 2, marginTop: 1 }}>
                 <img className="estrela-lista" src={estrela} alt="" />
-                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
+                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
                   Você recebeu {premiacao.valor} estrelas do {premiacao.professor.nome}
                 </Typography>
               </Box>
@@ -94,14 +94,15 @@ const ContaAluno = () => {
 
         </Box>
         <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px", marginRight: 1 }}>
-          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px"}}>
+          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px"}}>
             Compras Realizadas
           </Typography>
           {dadosCarregados && (listaTransacoes.data) ? listaTransacoes.data.map((transacao) => {
             return (
-              <Box key={transacao.id} sx={{ display: "flex", gap: 2, marginTop: 3 }}>
-                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
-                  Você comprou {transacao.vantagem.nome} por {transacao.valor} estrelas
+              <Box key={transacao.id} sx={{ display: "flex", gap: 0.5, marginTop: 1 }}>
+                <img className="estrela-lista" src={estrela} alt="" />
+                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
+                {transacao.valor} - {transacao.vantagem.nome}
                 </Typography>
               </Box>
             )
