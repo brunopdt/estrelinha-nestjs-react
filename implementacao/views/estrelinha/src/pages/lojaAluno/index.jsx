@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-
-import teste from "../../assets/cadastro.png"
 import estrela from "../../assets/Star.png"
 
 import { useApi } from "../../api/axiosInstance";
@@ -11,7 +9,6 @@ import { useApi } from "../../api/axiosInstance";
 const LojaAluno = () => {
 
   const [listaVantagens, setListaVantagens] = useState([]);
-  const [listaPremiacoes, setlistaPremiacoes] = useState([]);
   const [dadosCarregados, setDadosCarregados] = useState(false);
 
   const navigate = useNavigate();
