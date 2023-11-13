@@ -6,12 +6,16 @@ async function seed() {
   try {
 
     await prisma.premiacao.deleteMany({});
+    await prisma.transacao.deleteMany({});
     await prisma.aluno.deleteMany({});
     await prisma.curso.deleteMany({});
     await prisma.professor.deleteMany({});
+    await prisma.vantagem.deleteMany({});
+    await prisma.empresa.deleteMany({});
     await prisma.usuario.deleteMany({});
     await prisma.conta.deleteMany({});
     await prisma.instituicao.deleteMany({}); 
+    
     // return;
 
     const instituicoes = [
@@ -23,7 +27,7 @@ async function seed() {
         contaId: 3,
         cursoId: 1,
         cpf: "1234567890",
-        email: "aluno@email.com",
+        email: "bruno.pduarte0@gmail.com",
         endereco: "rua 3",
         instituicaoId: 1,
         nome: "Everson",
@@ -34,7 +38,7 @@ async function seed() {
         contaId: 4,
         cursoId: 1,
         cpf: "123",
-        email: "aluno2@email.com",
+        email: "lindooufeio@gmail.com",
         endereco: "rua 2",
         instituicaoId: 1,
         nome: "Joana",
@@ -116,6 +120,7 @@ async function seed() {
         instituicaoId: 1,
         contaId: 1,
         nomeUsuario: "prof1",
+        email: "doris8012@uorak.com"
       },
       {
         cpf: "123456",
@@ -125,6 +130,7 @@ async function seed() {
         instituicaoId: 1,
         contaId: 2,
         nomeUsuario: "prof2",
+        email: "yuwei2518@uorak.com"
       }
     ]
 
@@ -150,11 +156,13 @@ async function seed() {
        cnpj: "1234567890",
        nomeFantasia: "Bitz",
        nomeUsuario: "empresa1",
+      email: "artjansentec@gmail.com" 
       },
       {
         cnpj: "0987654321",
         nomeFantasia: "Tech",
         nomeUsuario: "empresa2",
+        email: "bpdtiger@gmail.com" 
        },
     ]
 

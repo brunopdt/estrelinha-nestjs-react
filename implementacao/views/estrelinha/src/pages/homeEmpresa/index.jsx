@@ -37,7 +37,7 @@ const HomeEmpresa = () => {
           {dadosCarregados ? listaVantagens.data.map((vantagem) => {
             return (
               <Box key={vantagem.nome} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", border: "1px solid #7F4AA4", borderRadius: "10px", textAlign: "left", width: "300px", height: "425px", boxShadow: "rgba(0, 0, 0, 0.15) 5px 5px 2.6px;" }}>
-                <img className="card-vantagens" src={vantagem.nome} alt="Card Imagem" />
+                <img className="card-vantagens" src={vantagem.fotoKey} alt="Card Imagem" />
                 <Typography component="h3" variant="h3" sx={{ padding: "20px", color: "#000000", fontSize: "22px" }}>
                   {vantagem.nome}
                 </Typography>

@@ -2,6 +2,7 @@ import { BadRequestException, ConflictException, Injectable } from '@nestjs/comm
 import { CadastroAlunoDTO } from './dto/CadastroAluno.dto';
 import { AlunoRepository } from './aluno.repository';
 import { Aluno, Transacao, Usuario, Vantagem } from '@prisma/client'
+import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class AlunoService {
@@ -52,7 +53,38 @@ export class AlunoService {
   async comprarVantagem(nomeUsuario: string, vantagemId: number): Promise<void> {
     const aluno = await this.alunoRepository.findAlunoByNomeUsuario(nomeUsuario);
     if(!aluno) throw new BadRequestException('Aluno não encontrado');
+    const vantagem = await this.alunoRepository.getVantagemById(vantagemId);
+    if(!vantagem) throw new BadRequestException('Vantagem não encontrada');
 
-    return await this.alunoRepository.comprarVantagem(nomeUsuario, vantagemId, aluno);
+    await this.alunoRepository.comprarVantagem(nomeUsuario, vantagem, aluno);
+
+    this.sendMail(aluno.email, aluno.nome, vantagem.nome, vantagem.valor.toString());
+    this.sendMail(vantagem.empresa.email, aluno.nome, vantagem.nome, vantagem.valor.toString());
+  }
+
+  sendMail = (email: string, nomeAluno: string, nomeVantagem: string, valorVantagem: string) => {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'bruno.pduarte0@gmail.com',
+        pass: 'ovfc yzei muuv bndt'
+      }
+    });
+
+    const mailOptions = {
+      from: 'bruno.pduarte0@gmail.com',
+      to: `${email}`,
+      subject: 'Compra de vantagem',
+      text: `O aluno ${nomeAluno} acabou de comprar a vantagem ${nomeVantagem} por ${valorVantagem} créditos! Uhuuuu!`
+    };
+    
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
   }
 }

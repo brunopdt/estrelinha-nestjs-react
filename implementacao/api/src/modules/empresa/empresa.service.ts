@@ -4,18 +4,21 @@ import { EmpresaRepository } from './empresa.repository';
 import { Empresa, Usuario } from '@prisma/client';
 import { CreateVantagemDto } from './dto/CadastroVantagem.dto';
 import * as azurestorage from 'azure-storage';
+import { Readable } from 'stream';
+import { BlobServiceClient, BlockBlobClient } from '@azure/storage-blob';
 
 @Injectable()
 export class EmpresaService {
-  constructor(private readonly empresasRepository: EmpresaRepository) {}
+  constructor(private readonly empresasRepository: EmpresaRepository) { }
 
   async create(createEmpresaDto: CreateEmpresaDto): Promise<Usuario> {
     const empresaExistente = await this.findOne(createEmpresaDto.cnpj);
-    if(empresaExistente) throw new ConflictException('Já existe uma empresa cadastrada com esse CNPJ');
+    if (empresaExistente) throw new ConflictException('Já existe uma empresa cadastrada com esse CNPJ');
 
     const empresa: Empresa = {
       nomeFantasia: createEmpresaDto.nomeFantasia,
       cnpj: createEmpresaDto.cnpj,
+      email: 'mp6046969@gmail.com',
       nomeUsuario: undefined,
     };
 
@@ -35,15 +38,18 @@ export class EmpresaService {
     return this.empresasRepository.findOne(cnpj);
   }
 
+
   async insertVantagem(transacao: CreateVantagemDto): Promise<void> {
-    const blobSvc = azurestorage.createBlobService("DefaultEndpointsProtocol=https;AccountName=estrelinha;AccountKey=OKG7phoBGXMgHkmFTGcye6mae5Dg8PqZpcxoHGy/ssefL4y6LhLclmNWrtB69LuKXzeWPqz6+sOb+AStxviuzg==;EndpointSuffix=core.windows.net");
-    const fileName = `${transacao.empresaCnpj}-${transacao.nome}-${transacao.valor}.jpg`;
-    const containerName = 'estrelinha';
-    const imageBuffer = transacao.fotoKey;
-
-    await blobSvc.createBlockBlobFromText(containerName, fileName, imageBuffer, () => {});
-    const imageUrl = await blobSvc.getUrl(containerName, fileName);
-
+    const blobServiceClient = BlobServiceClient.fromConnectionString("DefaultEndpointsProtocol=https;AccountName=estrelinha;AccountKey=OKG7phoBGXMgHkmFTGcye6mae5Dg8PqZpcxoHGy/ssefL4y6LhLclmNWrtB69LuKXzeWPqz6+sOb+AStxviuzg==;EndpointSuffix=core.windows.net");
+    const containerClient = blobServiceClient.getContainerClient('estrelinha');
+    const blobName = `${transacao.empresaCnpj}-${transacao.nome}-${transacao.valor}.jpg`;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    const imageBuffer = Buffer.from(transacao.fotoKey, 'base64');
+  
+    await blockBlobClient.uploadData(imageBuffer);
+  
+    const imageUrl = blockBlobClient.url;
+  
     await this.empresasRepository.insertVantagem(transacao, imageUrl);
   }
 }

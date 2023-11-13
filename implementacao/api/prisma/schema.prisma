@@ -30,6 +30,7 @@ model Empresa {
   nomeFantasia String
   nomeUsuario  String     @unique
   usuario      Usuario    @relation(fields: [nomeUsuario], references: [nomeUsuario])
+  email        String?
   vantagens    Vantagem[]
 }
 
@@ -49,6 +50,7 @@ model Professor {
   nomeUsuario   String      @unique
   instituicaoId Int
   contaId       Int         @unique
+  email         String?
   usuario       Usuario     @relation(fields: [nomeUsuario], references: [nomeUsuario])
   instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
   conta         Conta       @relation(fields: [contaId], references: [id])
