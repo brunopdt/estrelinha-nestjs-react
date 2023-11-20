@@ -48,7 +48,7 @@ const CadastroVantagem = () => {
           empresaCnpj: cnpj
         });
 
-        navigate("/loja-aluno")
+        navigate("/home-empresa")
         
       } catch (error) {
         Swal.fire({

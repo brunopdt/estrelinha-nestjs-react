@@ -46,3 +46,12 @@
   background-repeat: no-repeat;
   border-radius: 0px 10px 10px 0px;
 }
+
+.card-vantagens {
+  width: 100%;
+}
+
+.card-estrela {
+  width: 25px;
+  margin-top: -3px;
+}

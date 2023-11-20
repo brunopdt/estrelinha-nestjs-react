@@ -6,6 +6,7 @@ import ContaProfessor from "./pages/contaProfessor"
 import ContaAluno from "./pages/contaAluno"
 import CadastroVantagem from "./pages/cadastroVantagens"
 import LojaAluno from "./pages/lojaAluno"
+import HomeEmpresa from "./pages/homeEmpresa"
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/conta-aluno" element={<ContaAluno />} />
         <Route path="/cadastro-vantagem" element={<CadastroVantagem />} />
         <Route path="/loja-aluno" element={<LojaAluno />} />
+        <Route path="/home-empresa" element={<HomeEmpresa />} />
       </Routes>
     </BrowserRouter>
   )

@@ -32,12 +32,12 @@ export class EmpresaRepository {
     });
   }
 
-  async insertVantagem(vantagem: CreateVantagemDto): Promise<void> {
-    console.log(vantagem);
+  async insertVantagem(vantagem: CreateVantagemDto, imageUrl: string): Promise<void> {
     const insertedVantagem = {...vantagem, empresaCnpj: undefined}
     await this.prisma.vantagem.create({
       data: {
         ...insertedVantagem,
+        fotoKey: imageUrl,
         empresa: {
           connect: {
             cnpj: vantagem.empresaCnpj,

@@ -10,22 +10,43 @@ import FormEnvioEstrelas from "../../components/formEnvioEstrelas";
 
 
 const ContaProfessor = () => {
-  const [openDialog, setOpendialog] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
 
-  const [listaTransacoes, setlistaTransacoes] = useState([]);
+  const [abrirDescricao, setAbrirDescricao] = useState(false)
+  const [currentItem, setCurrentItem] = useState(null);
+
+  const [listaTransacoes, setListaTransacoes] = useState([]);
+  const [listaAlunos, setListaAlunos] = useState([]);
   const [dadosCarregados, setDadosCarregados] = useState(false);
+  const [dadosCarregadosAlunos, setDadosCarregadosAlunos] = useState(false);
 
   const fetchlistaTransacoes = async () => {
     try {
       const nomeUsuario = JSON.parse(localStorage.getItem("usuario")).data.nomeUsuario
       const data = await useApi.get(`/professor/transacoes/${nomeUsuario}`);
-      setlistaTransacoes(data);
+      setListaTransacoes(data);
+      fetchlistaAlunos()
       setDadosCarregados(true);
     } catch (error) {
       console.error('Erro na requisição:', error);
     }
   };
 
+  const abrirDescricaoIndividual = (item) => {
+    setCurrentItem(item)
+    setAbrirDescricao(true)
+  }
+
+  const fetchlistaAlunos = async () => {
+    try {
+      const data = await useApi.get(`/aluno`);
+      console.log(data)
+      setListaAlunos(data);
+      setDadosCarregadosAlunos(true);
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+  };
   useEffect(() => {
     fetchlistaTransacoes();
   }, [openDialog]);
@@ -56,34 +77,65 @@ const ContaProfessor = () => {
                 ":hover": {
                   backgroundColor: "#FBB80F", color: "#7F4AA4"
                 }
-              }} onClick={() => setOpendialog(true)}>Dar Estrelas</Button>
+              }} onClick={() => setOpenDialog(true)}>Dar Estrelas</Button>
 
-            <Dialog open={openDialog} onClose={() => setOpendialog(false)}>
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
               <Box sx={{ margin: "50px 10px" }}>
-                <FormEnvioEstrelas setOpendialog={setOpendialog} />
+                <FormEnvioEstrelas setOpendialog={setOpenDialog} />
               </Box>
             </Dialog>
           </Box>
 
         </Box>
       </Box >
-      <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
-        <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px" }}>
-          Transações
-        </Typography>
-        {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
-          return (
-            <Box key={premiacao.nomeUsuario} sx={{ display: "flex", gap: 2 , marginTop: 3}} className="list-item">
-              <img className="estrela-lista" src={estrela} alt="" />
-              <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "30px" }}>
-                Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!
-              </Typography>
-            </Box>
-          )
-        }) : console.log(listaTransacoes)}
+      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
+          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px" }}>
+            Transações
+          </Typography>
+          {dadosCarregados ? listaTransacoes.data.premiacoes.map((premiacao) => {
+            return (
+              <Box key={premiacao.id} onClick={() => abrirDescricaoIndividual(premiacao)} sx={{ display: "flex", gap: 2, marginTop: 1, ":hover": {
+                cursor: "pointer"
+              } }} className="list-item">
+                <img className="estrela-lista" src={estrela} alt="" />
+                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
+                  Você enviou {premiacao.valor} estrelas para {premiacao.aluno.nome}!
+                </Typography>
+              </Box>
 
+            )
+          }) : console.log(listaTransacoes)}
+
+
+          <Dialog open={abrirDescricao} onClose={() => setAbrirDescricao(false)} onClick={() => setAbrirDescricao(false)}>
+            {currentItem ?
+              <Box sx={{ margin: "60px 10px" }}>
+
+                <Typography sx={{ fontSize: 25 }}>Você enviou {currentItem.valor} estrelas para {currentItem.aluno.nome}</Typography>
+                <Typography sx={{ fontSize: 25 }}>Motivo: {currentItem.descricao}</Typography>
+
+              </Box> : ""
+            }
+          </Dialog>
+        </Box>
+        <Box sx={{ border: "3px solid #7F4AA4", padding: "10px 40px", borderRadius: "10px", textAlign: "center", marginBottom: "50px" }}>
+          <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "35px" }}>
+            Top Alunos
+          </Typography>
+          {dadosCarregadosAlunos ? listaAlunos.data.map((aluno) => {
+            return (
+              <Box key={aluno.cpf} sx={{ display: "flex", gap: 2, marginTop: 1 }} className="list-item">
+                <img className="estrela-lista" src={estrela} alt="" />
+                <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#000000", fontSize: "25px" }}>
+                  {aluno.nome}
+                </Typography>
+              </Box>
+            )
+          }) : console.log(listaTransacoes)}
+        </Box>
       </Box>
-    </Box >
+    </Box>
   );
 };
 

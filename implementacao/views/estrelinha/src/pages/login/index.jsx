@@ -45,7 +45,7 @@ const Login = () => {
         }
         if (resposta.data.cnpj) {
           console.log("aqui")
-          navigate("/cadastro-vantagem")
+          navigate("/home-empresa")
         }
         if (resposta.data.departamento) {
           navigate("/conta-professor")

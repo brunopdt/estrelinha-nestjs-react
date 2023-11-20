@@ -6,12 +6,16 @@ async function seed() {
   try {
 
     await prisma.premiacao.deleteMany({});
+    await prisma.transacao.deleteMany({});
     await prisma.aluno.deleteMany({});
     await prisma.curso.deleteMany({});
     await prisma.professor.deleteMany({});
+    await prisma.vantagem.deleteMany({});
+    await prisma.empresa.deleteMany({});
     await prisma.usuario.deleteMany({});
     await prisma.conta.deleteMany({});
     await prisma.instituicao.deleteMany({}); 
+    
     // return;
 
     const instituicoes = [
@@ -23,10 +27,10 @@ async function seed() {
         contaId: 3,
         cursoId: 1,
         cpf: "1234567890",
-        email: "aluno@email.com",
+        email: "bruno.pduarte0@gmail.com",
         endereco: "rua 3",
         instituicaoId: 1,
-        nome: "aluno 1",
+        nome: "Everson",
         nomeUsuario: "aluno1",
         rg: "123456",
       },
@@ -34,10 +38,10 @@ async function seed() {
         contaId: 4,
         cursoId: 1,
         cpf: "123",
-        email: "aluno2@email.com",
+        email: "lindooufeio@gmail.com",
         endereco: "rua 2",
         instituicaoId: 1,
-        nome: "aluno 2",
+        nome: "Joana",
         nomeUsuario: "aluno2",
         rg: "1234567",
       }
@@ -81,11 +85,11 @@ async function seed() {
       },
       {
         id: 3,
-        saldo: 0,
+        saldo: 50,
       },
       {
         id: 4,
-        saldo: 0,
+        saldo: 20,
       }
     ]
 
@@ -112,19 +116,21 @@ async function seed() {
         cpf: "12345",
         departamento: "computação",
         endereco: "rua 1",
-        nome: "professor 1",
+        nome: "Rafael",
         instituicaoId: 1,
         contaId: 1,
         nomeUsuario: "prof1",
+        email: "doris8012@uorak.com"
       },
       {
         cpf: "123456",
         departamento: "filosofia",
         endereco: "rua 2",
-        nome: "professor 2",
+        nome: "Ana",
         instituicaoId: 1,
         contaId: 2,
         nomeUsuario: "prof2",
+        email: "yuwei2518@uorak.com"
       }
     ]
 
@@ -134,7 +140,7 @@ async function seed() {
         id: 1,
         professorCpf: "12345",
         descricao: "ótimo comportamento",
-        valor: 10,
+        valor: 50,
       },
       {
         alunoCpf: "123",
@@ -148,41 +154,43 @@ async function seed() {
     const empresas: Empresa[] = [
       {
        cnpj: "1234567890",
-       nomeFantasia: "empresa 1",
+       nomeFantasia: "Bitz",
        nomeUsuario: "empresa1",
+      email: "artjansentec@gmail.com" 
       },
       {
         cnpj: "0987654321",
-        nomeFantasia: "empresa 2",
+        nomeFantasia: "Tech",
         nomeUsuario: "empresa2",
+        email: "bpdtiger@gmail.com" 
        },
     ]
 
     const vantagens: Vantagem[] = [
       {
         empresaCnpj: "1234567890",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 1,
         nome: "Carrinho da Hot Wheels",
-        valor: 10,
+        valor: 2,
       },
       {
         empresaCnpj: "1234567890",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-miata-1.jpg",
         id: 2,
         nome: "Pista Ataque do Tubarão",
-        valor: 100,
+        valor: 8,
       },
       {
         empresaCnpj: "0987654321",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-dente%20de%20le%C3%A3o-78.jpg",
         id: 3,
-        nome: "Audi RS 5 Coupé 2015 4.2 FSI V8 450cv Tiptronic Quattro",
+        nome: "Audi RS 5 Coupé",
         valor: 800000,
       },
       {
         empresaCnpj: "0987654321",
-        fotoKey: "foto",
+        fotoKey: "https://estrelinha.blob.core.windows.net/estrelinha/1234567890-dente%20de%20le%C3%A3o-78.jpg",
         id: 4,
         nome: "Borboleta de brinquedo",
         valor: 5,
