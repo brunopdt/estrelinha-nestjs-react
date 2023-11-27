@@ -35,3 +35,22 @@ O sistema deve permitir o envio de moedas, notificações por email, consulta de
  - Prisma
  - React
  - TypeScript
+
+## 💿 Como executar 
+
+### Back end
+- Primeiro, acesse a pasta API por meio de ```cd implementacao/api```
+- Em seguida, instale as dependências com ```npm i```.
+- Após isso, crie a conexão local no seu SGBD e o schema, nomeando-o como desejar.
+- Crie o arquivo ".env" com base no arquivo ".env.example" disponibilizado no repositório e substitua os dados com a sua conexão (nome do schema, usuário, senha e porta - geralmente 3306).
+- Execute o comando ```npx prisma migrate dev``` para aplicar as migrações do schema na sua conexão local do bacno de dados.
+- Execute ```npx prisma db seed``` para popular o banco com dados de exemplo.
+- Por fim, execute ```npm run start:dev``` para executar o back-end.
+
+### Front end
+- Primeiro, acesse a pasta views por meio de ```cd implementacao/views```.
+- Em seguida, instale as dependências com ```npm i```.
+- Por fim, rode o projeto react com ```npm run dev```.
+
+E você já está pronto para acessar o sistema estrelinha!
+
