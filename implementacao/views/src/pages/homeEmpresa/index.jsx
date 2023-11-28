@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { useApi } from "../../api/axiosInstance";
 import estrela from "../../assets/Star.png"
+import CardProduto from "../../components/CardProduto";
 
 const HomeEmpresa = () => {
 
@@ -36,19 +37,7 @@ const HomeEmpresa = () => {
           </Typography>
           {dadosCarregados ? listaVantagens.data.map((vantagem) => {
             return (
-              <Box key={vantagem.nome} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", border: "1px solid #7F4AA4", borderRadius: "10px", textAlign: "left", width: "300px", height: "425px", boxShadow: "rgba(0, 0, 0, 0.15) 5px 5px 2.6px;" }}>
-                <img className="card-vantagens" src={vantagem.fotoKey} alt="Card Imagem" />
-                <Typography component="h3" variant="h3" sx={{ padding: "20px", color: "#000000", fontSize: "22px" }}>
-                  {vantagem.nome}
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-                  <Typography component="h3" variant="h3" sx={{ paddingRight: "5px", fontSize: "25px", color: "#FBB80F", fontWeight: "bold" }}>
-                    {vantagem.valor}
-                  </Typography>
-                  <img className="card-estrela" src={estrela} alt="estrela" />
-                </Box >
-
-              </Box>
+              <CardProduto key={vantagem.nome} vantagem={vantagem} temBotao={false} />
             )
           }) : console.log(listaVantagens)}
           <Button

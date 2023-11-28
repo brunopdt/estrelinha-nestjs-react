@@ -15,7 +15,8 @@ const CadastroEmpresa = () => {
     nomeUsuario: "",
     senha: "",
     cnpj: "",
-    nomeFantasia: ""
+    nomeFantasia: "",
+    email: ""
   });
 
 
@@ -94,6 +95,17 @@ const CadastroEmpresa = () => {
               label="Nome Fantasia"
               name="nomeFantasia"
               value={formData.nomeFantasia}
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              type="email"
+              label="E-mail"
+              name="email"
+              value={formData.email}
               autoFocus
               onChange={handleChange}
             />
