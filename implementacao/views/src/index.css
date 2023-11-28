@@ -48,7 +48,9 @@
 }
 
 .card-vantagens {
-  width: 100%;
+  margin-top: 10px;
+  width: 95%;
+  border-radius: 10px;
 }
 
 .card-estrela {

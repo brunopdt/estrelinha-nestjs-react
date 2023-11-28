@@ -29,7 +29,7 @@ const LojaAluno = () => {
       <Box sx={{ display: "flex", flexDirection: "column", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingTop: 7 }}
       >
         
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 2, alignItems: "center", border: "3px solid #7F4AA4", padding: "10px 20px 20px 20px", borderRadius: "10px", textAlign: "center" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 1.5, alignItems: "center", border: "3px solid #7F4AA4", padding: "10px 20px 20px 20px", borderRadius: "10px", textAlign: "center" }}>
 
           <Typography component="h2" variant="h3" sx={{ paddingTop: "7px", color: "#7F4AA4", fontWeight: 600, fontSize: "40px", gridColumn: "span 4" }}>
             Vantagens

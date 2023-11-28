@@ -34,12 +34,12 @@ const CardProduto = ({ temBotao, vantagem }) => {
   };
 
   return (
-      <Box key={vantagem.nome} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center", border: "1px solid #7F4AA4", borderRadius: "10px", textAlign: "left", width: "300px", height: "480px", boxShadow: "rgba(0, 0, 0, 0.15) 5px 5px 2.6px;" }}>
+      <Box key={vantagem.nome} sx={{ display: "flex", flexDirection: "column", alignItems: "center", border: "1px solid #7F4AA4", borderRadius: "10px", boxShadow: "rgba(0, 0, 0, 0.15) 5px 5px 2.6px;", overflow: "hidden", minHeight: "250px", width: "240px"}}>
         <img className="card-vantagens" src={vantagem.fotoKey} alt="Card Imagem" />
         <Typography component="h3" variant="h3" sx={{ padding: "20px", color: "#000000", fontSize: "22px" }}>
           {vantagem.nome}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
           <Typography component="h3" variant="h3" sx={{ paddingRight: "5px", fontSize: "25px", color: "#FBB80F", fontWeight: "bold" }}>
             {vantagem.valor}
           </Typography>
