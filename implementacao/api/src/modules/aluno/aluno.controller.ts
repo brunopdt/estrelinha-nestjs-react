@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CadastroAlunoDTO } from './dto/CadastroAluno.dto';
 import { AlunoService } from './aluno.service';
 import { Aluno, Transacao, Vantagem } from '@prisma/client';
@@ -9,12 +9,14 @@ export class AlunoController {
   constructor(private readonly alunoService: AlunoService) { }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async cadastrarAluno(@Body() alunoDTO: CadastroAlunoDTO): Promise<{ success: boolean }> {
     await this.alunoService.cadastrarAluno(alunoDTO);
     return { success: true };
   }
 
   @Post('comprar-vantagem/:nomeUsuario')
+  @UsePipes(new ValidationPipe())
   async comprarVantagem(@Param('nomeUsuario') nomeUsuario, @Body() compraVantagemDTO: CompraVantagemDTO): Promise<{ success: boolean }> {
     await this.alunoService.comprarVantagem(nomeUsuario, compraVantagemDTO.vantagemId);
     return { success: true };

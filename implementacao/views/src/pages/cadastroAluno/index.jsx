@@ -47,6 +47,18 @@ const CadastroAluno = () => {
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+
+      let isFormularioValido = Object.values(formData).every(value => value.trim() !== '');
+
+      if (!isFormularioValido) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Por favor, preencha todos os campos',
+        });
+        return;
+      }
+
       try {
         console.log({ ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId })
         const resposta = await useApi.post("/aluno", { ...formData, cursoId: curso.id, instituicaoId: curso.instituicaoId });
