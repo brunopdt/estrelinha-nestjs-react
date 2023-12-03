@@ -28,7 +28,7 @@ const CardProduto = ({ temBotao, vantagem }) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `Erro na compra: ${error}`,
+        text: `Erro na compra: ${error.response.data.message}`,
       })
     }
   };
