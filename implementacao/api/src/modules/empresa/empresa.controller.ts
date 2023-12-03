@@ -4,6 +4,8 @@ import {
   Post,
   Body,
   Param,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { EmpresaService } from './empresa.service';
 import { CreateEmpresaDto } from './dto/CadastroEmpresa.dto';
@@ -15,6 +17,7 @@ export class EmpresaController {
   constructor(private readonly empresaService: EmpresaService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async cadastrarEmpresa(@Body() createEmpresaDto: CreateEmpresaDto):Promise<{success: boolean}> {
     await this.empresaService.create(createEmpresaDto);
     return {success: true};
