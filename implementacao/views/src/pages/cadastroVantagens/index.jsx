@@ -3,6 +3,7 @@ import { Button, Box, TextField, Grid, Typography, Container } from "@mui/materi
 import { useCallback, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Navegacao } from "../../components/navBar";
 
 import "./style.css"
 
@@ -97,80 +98,83 @@ const CadastroVantagem = () => {
 
 
   return (
-    <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
-      <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
-      >
-        <Box sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: 350
-        }}>
-          <Typography component="h1" variant="h2" sx={{ color: "#FBB80F", fontFamily: "Shantell Sans", fontSize: 30, marginBottom: "30px" }}>
-            Cadastro Vantagem
-          </Typography>
+    <>
+    <Navegacao />
+      <Container component="main" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+        <Box sx={{ display: "flex", gap: 10, borderRadius: 5, backgroundColor: "#FFFFFF", paddingLeft: 7 }}
+        >
+          <Box sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: 350
+          }}>
+            <Typography component="h1" variant="h2" sx={{ color: "#FBB80F", fontFamily: "Shantell Sans", fontSize: 30, marginBottom: "30px" }}>
+              Cadastro Vantagem
+            </Typography>
 
-          <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', marginLeft: -3.7 }}>
-            <Grid item xs={12} md={10} lg={10} >
-              <div className="drop-container">
-                <span className="drop-title">Anexe a foto</span>
-                <input type="file" id="file-input" accept="image/*"
-                  onChange={handleImageUpload} />
-              </div>
+            <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', marginLeft: -3.7 }}>
+              <Grid item xs={12} md={10} lg={10} >
+                <div className="drop-container">
+                  <span className="drop-title">Anexe a foto</span>
+                  <input type="file" id="file-input" accept="image/*"
+                    onChange={handleImageUpload} />
+                </div>
+              </Grid>
+              <Grid item xs={12} md={10} lg={10} sx={{alignItems: "center", justifyContent: "center"}}>
+                {imageURLs.map((imageSrc) => <img className="image-upload" key={imageSrc} src={imageSrc} />
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={10} lg={10} sx={{alignItems: "center", justifyContent: "center"}}>
-              {imageURLs.map((imageSrc) => <img className="image-upload" key={imageSrc} src={imageSrc} />
-              )}
-            </Grid>
-          </Grid>
 
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Nome da Vantagem"
-              name="nome"
-              value={formData.nome}
-              autoFocus
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              type="number"
-              name="valor"
-              label="Valor"
-              value={formData.valor}
-              onChange={handleChange}
-
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 3, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, marginBottom: 10,
-                ":hover": {
-                  backgroundColor: '#7F4AA4', color: '#FBB80F'
-                }
-              }}
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
             >
-              CADASTRAR
-            </Button>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="Nome da Vantagem"
+                name="nome"
+                value={formData.nome}
+                autoFocus
+                onChange={handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                type="number"
+                name="valor"
+                label="Valor"
+                value={formData.valor}
+                onChange={handleChange}
+
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3, backgroundColor: "#FBB80F", color: "#7F4AA4", fontWeight: 800, marginBottom: 10,
+                  ":hover": {
+                    backgroundColor: '#7F4AA4', color: '#FBB80F'
+                  }
+                }}
+              >
+                CADASTRAR
+              </Button>
+            </Box>
+          </Box>
+          <Box className="imagem-vantagem">
+
           </Box>
         </Box>
-        <Box className="imagem-vantagem">
-
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
   );
 };
 
