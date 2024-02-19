@@ -1,14 +1,5 @@
-<div style="display: flex;">
-  <img style="width: 95px" src="https://seeklogo.com/images/M/microsoft-azure-logo-85055C44BE-seeklogo.com.png">
-  <img style="width: 95px" src="https://images.squarespace-cdn.com/content/v1/5a0db00aa803bb3cf9879f92/1572420904141-IUYZOF19BTEJ3UFEFH6T/Drawio.png?format=2500w">
-  <img style="width: 95px" src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png">
-  <img style="width: 95px" src="https://icons-for-free.com/iconfiles/png/512/vscode+icons+type+light+prisma-1324451365475006031.png">
-  <img style="width: 95px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png">
-  <img style="width: 95px" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg">
-
-</div>
-
 # Estrelinha - NestJS | React
+![project stack](https://skillicons.dev/icons?i=azure,ts,nest,prisma,react&perline=12) <br />
 
 
 ## 👨‍🏫 Professor:
